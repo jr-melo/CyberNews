@@ -17,7 +17,7 @@ Una vez el proyecto ha sido clonado, realizar desde el directorio los siguientes
 ## Crear Rama para Implementaciones
 
 - Ubicarse en rama master.
-- git checkout -b (NombreRama. Ej: "git checkout -b feature/crud-publicaciones").
+- git checkout -b NombreRama (Ej: "git checkout -b feature/crud-publicaciones").
 - Luego de realizar cambios: git push origin "NombreDeRamaCreada".
 
 
