@@ -27,3 +27,4 @@ Route::get('/admin', function () {
 })->name('admin');
 
 Route::resource('/admin/users', 'UsersController');
+Route::resource('/admin/roles', 'RolesController');
