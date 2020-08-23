@@ -61,6 +61,15 @@
                 </a>
               </li>
             </ul>
+            <li class="nav-item">
+            <a href="{{ url('/admin/category') }}" class="nav-link">
+           
+<i class="fab fa-500px"></i>
+              <p>
+                Categorias
+              </p>
+            </a>
+          </li>
           <li class="nav-header">Accesorios</li>
           <li class="nav-item">
             <a href="{{ url('/admin/calendar') }}" class="nav-link">
