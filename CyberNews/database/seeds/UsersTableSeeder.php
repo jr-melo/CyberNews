@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
             'id' => 1,
             'name' => 'Usuario Prueba',
             'email' => 'usrtest@localhost.com',
+            'role_id' => '1',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'),
             'remember_token' => Str::random(10),

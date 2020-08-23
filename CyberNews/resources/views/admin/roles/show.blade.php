@@ -31,7 +31,7 @@
                             <div class="controls">
                                 <label for="name"> Nombre de Rol: </label>
                                 <input class="form-control" required type="text" readonly name="name" id="name" placeholder="Introducir nombre."
-                                value="{{ old('name') }}"/>
+                                value="{{ old('rolname') }}"/>
                                 <div id="errrolename"></div>
                             </div>
                         </div>

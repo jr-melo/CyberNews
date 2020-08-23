@@ -47,7 +47,7 @@
                       @foreach ($roles as $role)
                           <tr>
                               <td>{{ $role->id }}</td>
-                              <td>{{ $role->name }}</td>
+                              <td>{{ $role->rolname }}</td>
                               <td>{{ $role->description}} </td>
                               <td>
                                   <div class="d-flex">

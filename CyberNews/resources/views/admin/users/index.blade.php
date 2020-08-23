@@ -40,6 +40,7 @@
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Correo electrónico</th>
+                            <th>Rol</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -49,6 +50,7 @@
                               <td>{{ $user->id }}</td>
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email}} </td>
+                              <td>{{ $user->rolname}} </td>
                               <td>
                                   <div class="d-flex">
                                     <ul class="list-inline center mx-auto justify-content-center m-0">

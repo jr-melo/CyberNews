@@ -67,7 +67,7 @@
     });
     $('#roles').validate({
       rules: {
-        name: {
+        rolname: {
           required: true
         },
         description: {
@@ -76,7 +76,7 @@
 
       },
       messages: {
-        name: {
+        rolname: {
           required: "Por favor introduzca un nombre."
         },
         email: {

@@ -1,0 +1,52 @@
+.btn-cancel1{
+    padding: 0px 40px;
+    background-image: linear-gradient(to right, #ca7373 0%, #d37070 51%, #73ca96 100%);
+    background-size: 200% auto;
+    z-index: 2;
+    display: inline-block;
+    -o-transition: all 400ms ease-out;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    width: auto;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    line-height: 50px;
+    border-radius: 5px;
+    outline: none !important;
+    box-shadow: none !important;
+    text-align: center;
+    transition: all 300ms linear 0s;
+}
+.btn-send1, .btn-back1{
+    padding: 0px 40px;
+    background-image: linear-gradient(to right, #73ca96 0%, #98d370 51%, #73ca96 100%);
+    background-size: 200% auto;
+    z-index: 2;
+    display: inline-block;
+    -o-transition: all 400ms ease-out;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    width: auto;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    line-height: 50px;
+    border-radius: 5px;
+    outline: none !important;
+    box-shadow: none !important;
+    text-align: center;
+    transition: all 300ms linear 0s;
+  
+}
+
+.logoimg{
+    float: left;
+    line-height: .8;
+    margin-left: 50px;
+    margin-right: .5rem;
+    margin-top: -3px;
+    max-height: 42px;
+    width: auto;
+}
+  
