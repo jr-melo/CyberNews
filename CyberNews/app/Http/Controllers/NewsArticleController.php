@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\news_article;
+use App\news;
 use Illuminate\Http\Request;
 
 class NewsArticleController extends Controller
@@ -14,7 +14,10 @@ class NewsArticleController extends Controller
      */
     public function index()
     {
-        //
+        $news = news::active()->get();
+       
+        return view("admin.news.index", compact('news'));
+       
     }
 
     /**
@@ -41,10 +44,10 @@ class NewsArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\news_article  $news_article
+     * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function show(news_article $news_article)
+    public function show(news $news_article)
     {
         //
     }
@@ -52,10 +55,10 @@ class NewsArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\news_article  $news_article
+     * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function edit(news_article $news_article)
+    public function edit(news $news_article)
     {
         //
     }
@@ -64,10 +67,10 @@ class NewsArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\news_article  $news_article
+     * @param  \App\news $news_article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, news_article $news_article)
+    public function update(Request $request, news $news_article)
     {
         //
     }
@@ -75,10 +78,10 @@ class NewsArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\news_article  $news_article
+     * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(news_article $news_article)
+    public function destroy(news $news_article)
     {
         //
     }

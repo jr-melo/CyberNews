@@ -32,6 +32,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('/admin/news') }}" class="nav-link">
+              <i class="far fa-newspaper"></i>
+              <p>
+                Noticias 
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-user-lock"></i>
