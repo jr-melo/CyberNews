@@ -19,12 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/* Route::get('/home', 'HomeController@index')->name('home'); */
 
-Route::get('/admin', function () {
+Route::get('/admin', 'AdminController@index')->name('admin');
+
+/* Route::get('/admin', function () {
     return view('admin.dashboard');
 
-})->name('admin');
+})->name('admin'); */
 
 Route::resource('/admin/users', 'UsersController');
 Route::resource('/admin/roles', 'RolesController');
