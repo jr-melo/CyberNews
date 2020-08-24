@@ -19,7 +19,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                    <h2><center>Redactar Noticia </center></h2>
+                    <h2><center>Redactar Noticias </center></h2>
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
@@ -32,7 +32,7 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form" id="users" name="users" method="post" action="{{ url('/admin/news') }}">
+                    <form role="form" id="news" name="news" method="post" action="{{ url('/admin/news') }}">
                         @method('POST')
                         @csrf
                         @include('admin.news.fields')       
@@ -43,7 +43,7 @@
                             </div>
                         </div>             
                     </form>
-        
+                   
                 </div>
                 <!-- /.card-body -->
               </div>

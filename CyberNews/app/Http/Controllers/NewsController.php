@@ -27,7 +27,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        $news=\DB::select('SELECT MAX(id+1) as id FROM news');
+        return view('admin.news.create',compact('news'));
     }
 
     /**
@@ -38,7 +39,32 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate(
+            [
+                'title' => 'required|min:15|max:60',
+                'article' => 'required'
+                
+            ],
+            [
+                'title.required' => 'Por favor introduzca un titulo.',
+                'title.min' => 'Esto no parece un titulo muy descriptivo.',
+                'title.max' => 'Su titulo es un poco largo.',
+                'article.required'=>'Introduzca el contenido por favor'
+            ]
+        );
+
+        $news = new News($request->all());
+        \DB::table('news')->insert(['title'=>$news->title, 'Autor'=>$news->Autor,
+        
+                                        'date'=>$news->date]);
+        
+        
+         \DB::table('article')->insert(['newsid'=>$news->newsid,'article'=>$news->article]);
+            
+          
+            
+        $request->session()->flash("flash_message", "Registro Creado con Éxito");
+        return view('admin.news.index');
     }
 
     /**
@@ -84,5 +110,25 @@ class NewsController extends Controller
     public function destroy(news $news_article)
     {
         //
+    }
+
+
+    public function validateFields(Request $request){
+        $validatedData = $request->validate(
+            [
+                'title' => 'required|min:15|max:60',
+                'article' => 'required'
+                
+            ],
+            [
+                'title.required' => 'Por favor introduzca un titulo.',
+                'title.min' => 'Esto no parece un titulo muy descriptivo.',
+                'title.max' => 'Su titulo es un poco largo.',
+                'article.required'=>'Introduzca el contenido por favor'
+            ]
+
+        );
+
+        return $validatedData;
     }
 }
