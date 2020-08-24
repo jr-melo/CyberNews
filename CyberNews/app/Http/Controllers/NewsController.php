@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\news;
 use Illuminate\Http\Request;
 
-class NewsArticleController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class NewsArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create');
     }
 
     /**

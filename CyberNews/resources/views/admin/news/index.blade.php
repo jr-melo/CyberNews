@@ -56,12 +56,12 @@
                                     <ul class="list-inline center mx-auto justify-content-center m-0">
                                         <li class="list-inline-item">
                                           <a class="nav-link" 
-                                            href="{{ url('/admin/users/' . $new->id ) }}"
+                                            href="{{ url('/admin/news/' . $new->id ) }}"
                                             role="button"><i class="fas fa-book-open"></i></a>
                                         </li>
                                         <li class="list-inline-item">
                                           <a class="nav-link"
-                                            href="{{ url('/admin/users/' . $new->id ) . '/edit' }}"
+                                            href="{{ url('/admin/news/' . $new->id ) . '/edit' }}"
                                             role="button"><i class="fas fa-edit"></i></a>
                                         </li>
                                           {{-- <li class="list-inline-item">
@@ -75,7 +75,7 @@
                                             class="fas fa-trash-alt"></i></a>
                                           <pre delete-dialog-model="deleteModelRecord" class="d-none">
 
-                                            <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/users/')}}" method="POST">
+                                            <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/news/')}}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                             </form>
