@@ -14,9 +14,9 @@ class CategorysController extends Controller
      */
     public function index()
     {
-        $category =categorys::active()->get();
+        $categorys = categorys::active()->get();
 
-        return view('admin.category.index',compact('category'));
+        return view('admin.category.index',compact('categorys'));
     }
 
     /**
@@ -37,9 +37,8 @@ class CategorysController extends Controller
      */
     public function store(Request $request)
     {
-        $categorys = new Categorys($this->validateFields($request))
-    ;
-        $categorys->save();
+        $category = new Categorys($this->validateFields($request));
+        $category->save();
         $request->session()->flash("flash_message", "Registro Creado con Éxito");
         return redirect('/admin/category');
 
@@ -48,38 +47,38 @@ class CategorysController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  App\categorys  $categorys
+     * @param  App\categorys  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(categorys $categorys)
+    public function show(categorys $category)
     {
-        session()->flashInput($categorys->toArray());
-
-        return view('admin.category.show',compact('categorys'));
+        session()->flashInput($category->toArray());
+        return view('admin.category.show',compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\categorys  $categorys
+     * @param  \App\categorys  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(categorys $categorys)
+    public function edit(categorys $category)
     {
-        return view('admin.category.edit', compact('categorys'));
+        session()->flashInput($category->toArray());
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\categorys  $categorys
+     * @param  \App\categorys  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categorys $categorys)
+    public function update(Request $request, categorys $category)
     {
-        $categorys->update($this->validateFields($request));
-        $categorys->save();
+        $category->update($this->validateFields($request));
+        $category->save();
         request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
         return redirect('/admin/category');
 
@@ -88,13 +87,13 @@ class CategorysController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\categorys  $categorys
+     * @param  \App\categorys  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categorys $categorys)
+    public function destroy(categorys $category)
     {
-        $categorys->active = 0;
-        $categorys->save();
+        $category->active = 0;
+        $category->save();
         request()->session()->flash("flash_message","El registro fue eliminado de manera satisfactoria!");
         return redirect('/admin/category');
     }
@@ -102,17 +101,17 @@ class CategorysController extends Controller
 
         public function validateFields(Request $request){
 
-    $validatedData = $request->validate(
-        [
-            'nombre' => 'required',
-            'descripcion' => 'required',
-        ],
-        [
-            'nombre.required' => 'El nombre de la categoria es requerido.',
-            'descripcion.required' => 'La descripción es requerida.',
-        ]
-    );
+        $validatedData = $request->validate(
+            [
+                'nombre' => 'required',
+                'descripcion' => 'required',
+            ],
+            [
+                'nombre.required' => 'El nombre de la categoria es requerido.',
+                'descripcion.required' => 'La descripción es requerida.',
+            ]
+        );
 
-    return $validatedData;
+        return $validatedData;
 }
 }

@@ -13,7 +13,7 @@
 
 <div class="form-group">
     <div class="controls">
-        <label for="descripcion"> Descripcion: </label>
+        <label for="descripcion"> Descripción: </label>
         <input class="form-control" required type="text" name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
         value="{{ old('descripcion') }}" />
         <div id="errdescripcion"></div>

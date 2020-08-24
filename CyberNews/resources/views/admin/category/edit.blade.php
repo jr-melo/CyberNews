@@ -19,7 +19,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                    <h2> Editar Categoria></h2>
+                    <h2> Editar Categoria</h2>
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
@@ -32,10 +32,27 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form" id="users" name="users" method="post" action="{{ url('/admin/category/' . $categorys->id) }}">
+                    <form role="form" id="category" name="category" method="post" action="{{ url('/admin/category/' . $category->id) }}">
                         @method('PATCH')
                         @csrf
-                        @include('admin.category.fields')
+
+                        <div class="form-group">
+                          <div class="controls">
+                              <label for="nambre"> Nombre: </label>
+                              <input class="form-control"  type="text" readonly name="nombre" id="nombre" placeholder="Introducir Categoria."
+                              value="{{ old('nombre') }}"/>
+                              <div id="errcategoria"></div>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          <div class="controls">
+                              <label for="descripcion"> Descripción: </label>
+                              <input class="form-control" required type="text" readonly name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
+                              value="{{ old('descripcion') }}" />
+                              <div id="errdescripcion"></div>
+                          </div>
+                      </div>
                         <div class="form-group">
                             <div class="controls">
                                 <a href="{{ url('/admin/category') }}" class="btn-cancel1">Cancelar</a>

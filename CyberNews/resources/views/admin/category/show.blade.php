@@ -24,34 +24,33 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form" id="users" name="users" method="post" action="{{ url('/admin/category/') . $categorys->id }}">
+                    <form role="form" id="categorys" name="categorys" method="post" action="{{ url('/admin/category/' . $category->id) }}">
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-    <div class="controls">
-        <label for="nambre"> Nombre: </label>
-        <input class="form-control"  type="text" name="nombre" id="nombre" placeholder="Introducir Categoria."
-        value="{{ old('nombre') }}"/>
-        <div id="errcategoria"></div>
-    </div>
-</div>
+                          <div class="controls">
+                              <label for="nombre"> Nombre: </label>
+                              <input class="form-control"  type="text" readonly name="nombre" id="nombre" placeholder="Introducir Categoria."
+                              value="{{ old('nombre') }}"/>
+                              <div id="errcategoria"></div>
+                          </div>
+                        </div>
 
-<div class="form-group">
-    <div class="controls">
-        <label for="descripcion"> Descripcion: </label>
-        <input class="form-control" required type="text" name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
-        value="{{ old('descripcion') }}" />
-        <div id="errdescripcion"></div>
-    </div>
-</div>
+                        <div class="form-group">
+                            <div class="controls">
+                                <label for="descripcion"> Descripcion: </label>
+                                <input class="form-control" required type="text" readonly name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
+                                value="{{ old('descripcion') }}" />
+                                <div id="errdescripcion"></div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="controls">
                                 <a href="{{ url('/admin/category') }}" class="btn-cancel1">Regresar</a>
                             </div>
                         </div>
                     </form>
-        
-        
                 </div>
                 <!-- /.card-body -->
               </div>

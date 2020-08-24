@@ -39,27 +39,27 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Descripcion</th>
+                            <th>Descripción</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach ($category as $categor)
+                      @foreach ($categorys as $category)
                           <tr>
-                              <td>{{ $categor->id }}</td>
-                              <td>{{ $categor->nombre }}</td>
-                              <td>{{ $categor->descripcion}} </td>
+                              <td>{{ $category->id }}</td>
+                              <td>{{ $category->nombre }}</td>
+                              <td>{{ $category->descripcion}} </td>
                               <td>
                               <div class="d-flex">
                                     <ul class="list-inline center mx-auto justify-content-center m-0">
                                         <li class="list-inline-item">
                                           <a class="nav-link" 
-                                            href="{{ url('/admin/category/' . $categor->id ) }}"
+                                            href="{{ url('/admin/category/' . $category->id ) }}"
                                             role="button"><i class="fas fa-book-open"></i></a>
                                         </li>
                                         <li class="list-inline-item">
                                           <a class="nav-link"
-                                            href="{{ url('/admin/category/' . $categor->id ) . '/edit' }}"
+                                            href="{{ url('/admin/category/' . $category->id ) . '/edit' }}"
                                             role="button"><i class="fas fa-edit"></i></a>
                                         </li>
                                           {{-- <li class="list-inline-item">
@@ -69,7 +69,7 @@
                                           </li> --}}
                                         <li class="list-inline-item">
                                           <a class="nav-link" href="#" role="button"
-                                            onclick="deleteModelRecord({{$categor->id}})"><i
+                                            onclick="deleteModelRecord({{$category->id}})"><i
                                             class="fas fa-trash-alt"></i></a>
                                           <pre delete-dialog-model="deleteModelRecord" class="d-none">
 
