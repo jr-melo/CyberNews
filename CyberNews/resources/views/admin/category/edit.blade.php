@@ -7,7 +7,7 @@
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
-      <li class="breadcrumb-item active">Categorias</li>
+      <li class="breadcrumb-item active">Categorías</li>
     </ol>
   </div><!-- /.col -->
 @endsection
@@ -84,14 +84,14 @@
       });
       $('#category').validate({
         rules: {
-          name: {
+          nombre: {
             required: true
           },
           descripcion: {
             required: true,
             },
         messages: {
-          name: {
+          nombre: {
             required: "Por favor introduzca un nombre."
           },
           descripcion: {
