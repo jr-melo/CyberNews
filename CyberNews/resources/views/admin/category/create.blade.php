@@ -66,14 +66,14 @@
       });
       $('#category').validate({
         rules: {
-          name: {
+          nombre: {
             required: true
           },
           descripcion: {
             required: true,
             },
         messages: {
-          name: {
+          nombre: {
             required: "Por favor introduzca un nombre."
           },
           descripcion: {
