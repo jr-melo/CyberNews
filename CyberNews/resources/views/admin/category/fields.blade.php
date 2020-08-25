@@ -1,7 +1,3 @@
-
-
-
-
 <div class="form-group">
     <div class="controls">
         <label for="nambre"> Nombre: </label>

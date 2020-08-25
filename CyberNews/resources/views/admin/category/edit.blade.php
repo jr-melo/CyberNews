@@ -23,7 +23,7 @@
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                    <script>alert( {{ $error }} )</script>
+                      <strong>Error!</strong> {{ $error }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -39,7 +39,7 @@
                         <div class="form-group">
                           <div class="controls">
                               <label for="nambre"> Nombre: </label>
-                              <input class="form-control"  type="text" readonly name="nombre" id="nombre" placeholder="Introducir Categoria."
+                              <input class="form-control"  type="text" name="nombre" id="nombre" placeholder="Introducir Categoria."
                               value="{{ old('nombre') }}"/>
                               <div id="errcategoria"></div>
                           </div>
@@ -48,7 +48,7 @@
                       <div class="form-group">
                           <div class="controls">
                               <label for="descripcion"> Descripción: </label>
-                              <input class="form-control" required type="text" readonly name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
+                              <input class="form-control" required type="text" name="descripcion" id="descripcion" placeholder="Introducir una descripcion."
                               value="{{ old('descripcion') }}" />
                               <div id="errdescripcion"></div>
                           </div>
