@@ -33,7 +33,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles=Role::active()->get();
+        return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -116,7 +117,7 @@ class UsersController extends Controller
             [
                 'name' => 'required|min:6|max:45',
                 'email' => 'required|email',
-                'role_id' => 'required',
+                'role_id' => 'required|numeric',
                 'password' => 'required|min:8',
                 'pass2' => 'required|same:password'
             ],
@@ -129,6 +130,7 @@ class UsersController extends Controller
                 'email.unique' => 'El correo electrónico introducido ya está siendo utilizado.',
                 'email.email' => 'Por favor introduzca un correo electrónico válido.',
                 'role_id.required' => 'Por favor seleccione un rol.',
+                'role_id.numeric' => 'Por favor seleccione un rol.',
                 'password.required' => 'Por favor introduzca una contraseña',
                 'password.min' => 'Su contraseña debe de tener al menos 8 caracteres.',
                 'password.max' => 'Su contraseña no debe contener mas de 16 caracteres.',

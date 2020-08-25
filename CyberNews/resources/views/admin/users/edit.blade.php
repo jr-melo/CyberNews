@@ -72,6 +72,10 @@
             required: true,
             email: true,
           },
+          role_id: {
+            required: true
+            number: true
+          },
           password: {
             required: true,
             minlength: 8,
@@ -90,6 +94,10 @@
           email: {
             required: "Por favor introduzca su correo electrónico.",
             email: "Por favor introduzca un correo electrónico válido."
+          },
+          role_id: {
+            required: "Por favor seleccione un rol."
+            number: "Por favor seleccione un rol."
           },
           password: {
             required: "Por favor introduzca una contraseña",

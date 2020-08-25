@@ -85,7 +85,7 @@
               <p>Documentation</p>
             </a>
           </li>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           <li class="nav-item">
             <a class="dropdown-item" href="{{ url('/') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="fas fa-sign-out-alt"></i> {{ __('Cerrar Sesión') }}
@@ -94,6 +94,7 @@
               @csrf
             </form>
           </li>
+          </div>
           </li>
         </ul>
       </nav>
