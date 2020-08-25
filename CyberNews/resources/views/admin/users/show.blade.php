@@ -49,7 +49,11 @@
                           <div class="controls">
                               <label for="rolname"> Rol: </label>
                               <input class="form-control" required type="text" readonly name="rolname" id="rolname" placeholder="Vacío."
-                              value="{{ old('role_id')}}" />
+                              @foreach ($roles as $role)
+                                @if($role->id == $user->role_id)
+                                  value="{{$role->rolname}}" />
+                                @endif
+                              @endforeach
                               <div id="errrolname"></div>
                           </div>
                       </div>

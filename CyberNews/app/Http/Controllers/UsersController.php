@@ -61,9 +61,9 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-
+        $roles=Role::active()->get();
         session()->flashInput($user->toArray());
-        return view('admin.users.show',compact('user'));
+        return view('admin.users.show',compact('user', 'roles'));
     }
 
     /**
@@ -74,9 +74,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        
+        $roles=Role::active()->get();
         session()->flashInput($user->toArray());
-        return view('admin.users.edit',compact('user'));
+        return view('admin.users.edit',compact('user', 'roles'));
 
     }
 
@@ -89,7 +89,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        //$roles=Role::active()->get();
         $user->update($this->validateFields($request));
+        $user->password = bcrypt($user->password);
         $user->save();
         $request->session()->flash("flash_message","El usuario fue actualizado!");
         return redirect('/admin/users');
@@ -114,6 +116,7 @@ class UsersController extends Controller
             [
                 'name' => 'required|min:6|max:45',
                 'email' => 'required|email',
+                'role_id' => 'required',
                 'password' => 'required|min:8',
                 'pass2' => 'required|same:password'
             ],
@@ -125,6 +128,7 @@ class UsersController extends Controller
                 'email.required' => 'Por favor introduzca su correo electrónico.',
                 'email.unique' => 'El correo electrónico introducido ya está siendo utilizado.',
                 'email.email' => 'Por favor introduzca un correo electrónico válido.',
+                'role_id.required' => 'Por favor seleccione un rol.',
                 'password.required' => 'Por favor introduzca una contraseña',
                 'password.min' => 'Su contraseña debe de tener al menos 8 caracteres.',
                 'password.max' => 'Su contraseña no debe contener mas de 16 caracteres.',

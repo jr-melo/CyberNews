@@ -1,6 +1,3 @@
-{{$roles = DB::table('roles')
-        ->select('roles.*')
-    ->get()}}
 
 <div class="form-group">
     <div class="controls">
@@ -19,26 +16,14 @@
         <div id="erremail"></div>
     </div>
 </div>
-
-{{-- <div class="form-group">
-    <div class="controls">
-        <label for="rolname"> Rol: </label>
-        <input class="form-control" required type="text" name="rolname" id="rolname" placeholder="Introducir correo."
-        value="{{ old('role_id') }}" />
-        <div id="erremail"></div>
-    </div>
-</div> --}}
-
+ 
 <div class="form-group">
-    <label for="role"> Rol: </label>
-    <select name="role" id="role" class="form-control" value="{{old('role_id')}}">
-        <option value=""> -- Seleccionar -- </option>
-        {{-- @foreach ($roles as $role)     --}}
-        <option value="1" >1</option>
-        <option value="2" >1</option>
-        <option value="3" >1</option>
-        <option value="4" >1</option>
-        {{-- @endforeach --}}
+    <label for="role_id"> Rol: </label>
+    <select name="role_id" id="role_id" class="form-control" value="{{ old('role_id') }}">
+        <option> -- Seleccionar -- </option>
+        @foreach ($roles as $role)
+            <option value="{{$role->id}}" >{{$role->rolname}}</option>
+        @endforeach
     </select>
 </div>
 
