@@ -92,7 +92,7 @@ class CategorysController extends Controller
      */
     public function destroy(categorys $category)
     {
-        $category->active = 0;
+        $category->field_status = 0;
         $category->save();
         request()->session()->flash("flash_message","El registro fue eliminado de manera satisfactoria!");
         return redirect('/admin/category');

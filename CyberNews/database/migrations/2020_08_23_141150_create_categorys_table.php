@@ -18,7 +18,7 @@ class CreateCategorysTable extends Migration
             $table->timestamps();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->boolean('active')->default(true);
+            $table->boolean('field_status')->default(true);
         });
     }
 

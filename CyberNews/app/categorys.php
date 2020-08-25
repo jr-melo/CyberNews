@@ -15,6 +15,6 @@ class categorys extends Model
     protected $guarded = [];
     public function scopeActive($query)
     {
-        $query->where('active', 1);
+        $query->where('field_status', 1);
     }
 }
