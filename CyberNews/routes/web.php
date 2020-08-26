@@ -31,3 +31,15 @@ Route::get('/admin', 'AdminController@index')->name('admin');
 Route::resource('/admin/users', 'UsersController');
 Route::resource('/admin/roles', 'RolesController');
 Route::resource('/admin/permissions', 'PermissionsController');
+
+Route::get('/posts', function () {
+    return view('/pages/posts');
+});
+
+Route::get('/about', function () {
+    return view('/pages/about');
+});
+
+Route::get('/contact', function () {
+    return view('/pages/contact');
+});
