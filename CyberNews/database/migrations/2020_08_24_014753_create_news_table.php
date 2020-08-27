@@ -15,7 +15,7 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id()->unique();
-            /* $table->unsignedBigInteger('category_id'); */
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('Autor');
             $table->date('date');
             $table->string('title');
@@ -29,7 +29,7 @@ class CreateNewsTable extends Migration
             //Relations
             $table->foreign('Autor')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('updatefor')->references('id')->on('users')->onDelete('cascade');
-            /* $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade'); */
+            $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
         });
         
       
