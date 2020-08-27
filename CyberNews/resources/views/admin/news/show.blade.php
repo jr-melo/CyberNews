@@ -17,7 +17,7 @@
                         <thead>
                         <tr>
                             <th>Datos</th>
-                            <th>Informacion</th>
+                            <th>Información</th>
                         </tr>
                         </thead>
 
@@ -34,7 +34,7 @@
                                 <td> {{ $news [0]->title }}  </td>
                                 
                             </tr>
-                            {{-- <tr>
+                            <tr>
                                
                                 @foreach ($categories as $category)
                                     @if ($category->id == $news [0]->category_id)
@@ -43,7 +43,7 @@
                                     @endif
                                 @endforeach
                                 
-                            </tr> --}}
+                            </tr>
                             <tr>
                                
                                 <td>  Autor </td>
@@ -53,16 +53,14 @@
                             <tr>
                                
                                 <td>  Creacion</td>
-                                <td> {{ $news [0]->date }}   </td>
+                                <td> {{ $news [0]->created_at}}   </td>
                                 
                             </tr>
-                             <tr>
-
-                               @foreach ($users as $user)
+                            @foreach ($users as $user)
                                     @if ($user->id == $news [0]->updatefor)
+                             <tr>
                                         <td> Usuario actualizó</td>
                                         <td> {{ $user->name }}   </td>
-                
                             </tr>
                             <tr>
                                 <td>  Fecha de Actualización </td>

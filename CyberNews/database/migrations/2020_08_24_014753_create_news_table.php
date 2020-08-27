@@ -14,15 +14,14 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->id()->unique();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('Autor');
-            $table->date('date');
+            $table->id();
             $table->string('title');
             $table->longText('body');
+            /* $table->date('date'); */
+            $table->unsignedBigInteger('Autor');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('updatefor')->nullable();
             $table->boolean('field_status')->default(true);
-           
             $table->timestamps();
             
 

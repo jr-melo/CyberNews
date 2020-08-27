@@ -12,14 +12,13 @@ class newsseeder extends Seeder
     public function run()
     {
         DB::table('news')->insert([
-            'id'=>1,
-            'Autor'=>'1',
-            /* 'category_id' => 1, */
             'title'=> 'Laura azota RD',
             'body'=>'LOREMIMPUT',
-            'updatefor'=>2,
-            'date'=>now(),
-
+            'Autor'=>'1',
+            'category_id' => '1',
+            'updatefor'=>'2',
+            'created_at' => now(),
+            /* 'date'=>now(),*/
 
         ]);
         $news = factory(App\news::class, 10)->create();

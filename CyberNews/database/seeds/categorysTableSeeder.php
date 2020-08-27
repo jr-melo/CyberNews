@@ -15,7 +15,7 @@ class categorysTableSeeder extends Seeder
             'nombre'=>'Deportes',
             'descripcion' => 'seccion de deportes',
         ]);
-        $categorys = factory(App\categorys::class, 10)->create();
+        $categorys = factory(App\categorys::class, 4)->create();
     }
 
     

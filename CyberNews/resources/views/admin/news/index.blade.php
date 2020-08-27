@@ -40,7 +40,8 @@
                             <th>ID</th>
                             <th>Titular</th>
                             <th>Autor</th>
-                            <th>fecha</th>
+                            <th>Categoría</th>
+                            <th>Fecha Creación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -50,7 +51,9 @@
                               <td>{{ $new->id }}</td>
                               <td>{{  $new->title }}</td>
                               <td>{{  $new->Autor}} </td>
-                              <td>{{  $new->date}} </td>
+                              <td>{{  $new->nombre}} </td>
+                              <td>{{  $new->created_at}} </td>
+                              
                               <td>
                                   <div class="d-flex">
                                     <ul class="list-inline center mx-auto justify-content-center m-0">
@@ -64,11 +67,6 @@
                                             href="{{ url('/admin/news/' . $new->id ) . '/edit' }}"
                                             role="button"><i class="fas fa-edit"></i></a>
                                         </li>
-                                          {{-- <li class="list-inline-item">
-                                            <a class="nav-link"
-                                               href="{{ url('/admin/users/' . $user->id ) . '/delete' }}"
-                                               role="button"><i class="fas fa-trash-alt"></i></a>
-                                          </li> --}}
                                         <li class="list-inline-item">
                                           <a class="nav-link" href="#" role="button"
                                             onclick="deleteModelRecord({{$new->id}})"><i

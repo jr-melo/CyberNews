@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class news extends Model
 {
     protected $fillable = [
-        'title', 'Autor', 'date','newsid','body','updated_at'
+        'title', 'body', 'Autor', 'category_id', 'updatefor', 'created_at', 'updated_at'
     ];
     public function scopeActive($query)
     {

@@ -17,8 +17,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = news::active()->get();
-       
+        $news = news::
+            join('categorys', 'categorys.id', '=', 'news.category_id')
+            ->select('news.*', 'categorys.nombre')
+            ->where('news.field_status', '=', '1')
+            ->get();
+
         return view("admin.news.index", compact('news'));
        
     }
@@ -30,8 +34,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.news.create');
+        $categories = categorys::active()->get();
+        return view('admin.news.create',compact( 'categories'));
     }
 
     /**
@@ -58,12 +62,12 @@ class NewsController extends Controller
      */
     public function show( $id)
     {
-        /* $categories = categorys::active()->get(); */
+        $categories = categorys::active()->get();
         $users = User::get();
         $news=\DB::table('news')
         ->join('users', 'users.id', '=','news.Autor')
         ->join('categorys', 'categorys.id', '=', 'news.category_id')
-        ->select('news.id','news.title', 'users.name','news.date', 'news.updatefor','news.updated_at', 'news.category_id', 'categorys.nombre')
+        ->select('news.id','news.title', 'users.name','news.created_at', 'news.updatefor','news.updated_at', 'news.category_id', 'categorys.nombre')
         ->where ('news.id','=',$id)
         ->get();
 
@@ -79,10 +83,9 @@ class NewsController extends Controller
      */
     public function edit(news $news)
     {
-        /* $categories = categorys::active()->get(); */
-        /* $news=news::findOrfail($id); */
+        $categories = categorys::active()->get();
         session()->flashInput($news->toArray());
-        return view('admin.news.edit',compact('news'/* , 'categories' */));
+        return view('admin.news.edit',compact('news', 'categories'));
     }
 
     /**
@@ -108,9 +111,10 @@ class NewsController extends Controller
      */
     public function destroy(news $news)
     {
-        \DB::table('news')
-        ->where('id', $news->id)
-        ->update(['field_status' => 0]);
+        $news->field_status = 0;
+        $news->save();
+        request()->session()->flash("flash_message","El usuario fue eliminado de manera satisfactoria!");
+
         return redirect('/admin/news');
     }
 
@@ -121,14 +125,17 @@ class NewsController extends Controller
                 'title' => 'required|min:15|max:60',
                 'Autor' => '',
                 'body' => 'required',
-                'date' => ''
+                'category_id' => 'required|numeric',
+                'updatefor'=> '',
                 
             ],
             [
                 'title.required' => 'Por favor introduzca un titulo.',
                 'title.min' => 'Esto no parece un titulo muy descriptivo.',
                 'title.max' => 'Su titulo es un poco largo.',
-                'body.required'=>'Introduzca el contenido por favor'
+                'body.required'=>'Introduzca el contenido por favor',
+                'category_id.numeric' => 'Por favor seleccione una categoría.',
+                'category_id.required' => 'Por favor seleccione una categoría.',
             ]
 
         );
