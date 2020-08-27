@@ -19,7 +19,8 @@ class NewsController extends Controller
     {
         $news = news::
             join('categorys', 'categorys.id', '=', 'news.category_id')
-            ->select('news.*', 'categorys.nombre')
+            ->join('users', 'users.id', '=','news.Autor')
+            ->select('news.*', 'categorys.nombre', 'users.name')
             ->where('news.field_status', '=', '1')
             ->get();
 
@@ -99,7 +100,7 @@ class NewsController extends Controller
     {
         $news->update($this->validateFields($request));
         $news->save();
-        $request->session()->flash("flash_message","La Noticia fue actualizada de manera satisfactoria!");
+        $request->session()->flash("flash_message","El registro fue actualizado de manera satisfactoria!");
         return redirect('/admin/news');
     }
 
@@ -113,7 +114,7 @@ class NewsController extends Controller
     {
         $news->field_status = 0;
         $news->save();
-        request()->session()->flash("flash_message","El usuario fue eliminado de manera satisfactoria!");
+        request()->session()->flash("flash_message","El registro fue eliminado de manera satisfactoria!");
 
         return redirect('/admin/news');
     }

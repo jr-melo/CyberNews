@@ -50,7 +50,7 @@
                           <tr>
                               <td>{{ $new->id }}</td>
                               <td>{{  $new->title }}</td>
-                              <td>{{  $new->Autor}} </td>
+                              <td>{{  $new->name}} </td>
                               <td>{{  $new->nombre}} </td>
                               <td>{{  $new->created_at}} </td>
                               
