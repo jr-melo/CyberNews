@@ -15,16 +15,21 @@ class CreateNewsTable extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id()->unique();
-            //fkcategorias
+            /* $table->unsignedBigInteger('category_id'); */
             $table->unsignedBigInteger('Autor');
             $table->date('date');
             $table->string('title');
             $table->longText('body');
-            $table->foreign('Autor')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('updatefor')->nullable();
+            $table->unsignedBigInteger('updatefor')->nullable();
             $table->boolean('field_status')->default(true);
            
             $table->timestamps();
+            
+
+            //Relations
+            $table->foreign('Autor')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updatefor')->references('id')->on('users')->onDelete('cascade');
+            /* $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade'); */
         });
         
       

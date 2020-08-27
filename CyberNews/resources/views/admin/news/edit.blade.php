@@ -23,7 +23,7 @@
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                    <script>alert( {{ $error }} )</script>
+                      <strong>Error! </strong> {{ $error }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -35,29 +35,32 @@
                     <form role="form" id="news" name="news" method="post" action="{{ url('/admin/news/' . $news->id) }}">
                       @method('PATCH')
                       @csrf
-                        <div class="form-group">
-                          <div class="controls">
-                              
-                            <input class="form-control" required type="text" name="title" id="title" placeholder="Editar Titulo." value="<?php echo $news->title?>"/>
-                            <div id="errusername"></div>
-                            <input type="hidden" value={{(Auth::user()->id)}} name="updatefor" id="updatefor">
-                          </div>
-                      </div>
-                     
-                      <div class="controls">
-                          
-                        <textarea  class="form-control" required name="body" id="body">  <?=$news->body?> </textarea> 
-                           
-                           
-                          <div id="erremail"></div>
-                      </div>
                       <div class="form-group">
-                         
+                        <div class="controls">
+                          <input class="form-control" required type="text" name="title" id="title" placeholder="Editar Titulo." value="<?php echo $news->title?>"/>
+                          <input type="hidden" value={{(Auth::user()->id)}} name="updatefor" id="updatefor">
+                        </div>
                       </div>
-                                <a href="{{ url('/admin/news') }}" class="btn-cancel1">Cancelar</a>
-                                <input class="btn-send1" type="submit" value="Grabar"/>
-                            </div>
-                        </div>             
+
+                      {{-- <div class="form-group">
+                        <label for="category_id"> Categoría: </label>
+                        <select name="category_id" id="category_id" class="form-control" value="{{ old('category_id') }}">
+                            <option value="r"> -- Seleccionar -- </option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}" >{{$category->nombre}}</option>
+                            @endforeach
+                        </select>
+                      </div> --}}
+                    
+                     
+                      <div class="form-group">
+                        <div class="controls">  
+                          <textarea  class="form-control" required name="body" id="body"> <?=$news->body?> </textarea> 
+                        </div>
+                      </div>
+                      
+                      <a href="{{ url('/admin/news') }}" class="btn-cancel1">Cancelar</a>
+                      <input class="btn-send1" type="submit" value="Grabar"/>           
                     </form>
                    
                 </div>

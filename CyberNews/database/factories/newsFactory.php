@@ -8,8 +8,9 @@ use Illuminate\Support\Str;
 
 $factory->define(news::class, function (Faker $faker) {
     return [
-        'title' => $faker->title(),
+        'title' => $faker->catchPhrase(),
         'Autor' => 2,
+        /* 'category_id' => 1, */
         'date' => now(),
         'body'=>$faker->text(),
         'field_status' => 1, 

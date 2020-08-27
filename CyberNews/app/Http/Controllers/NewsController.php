@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\news;
+use App\User;
+use App\categorys;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
 class NewsController extends Controller
 {
@@ -39,30 +42,10 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate(
-            [
-                'title' => 'required|min:15|max:60',
-                'body' => 'required'
-                
-            ],
-            [
-                'title.required' => 'Por favor introduzca un titulo.',
-                'title.min' => 'Esto no parece un titulo muy descriptivo.',
-                'title.max' => 'Su titulo es un poco largo.',
-                'body.required'=>'Introduzca el contenido por favor'
-            ]
-        );
 
-        $news = new News($request->all());
-        \DB::table('news')->insert(['title'=>$news->title, 'Autor'=>$news->Autor,
-        
-        'body'=>$news->body, 'date'=>$news->date]);
-        
-        
-         
-            
-          
-            
+        $news = new News($this->validateFields($request));
+        $news->save();
+
         $request->session()->flash("flash_message", "Registro Creado con Éxito");
         return  redirect('/admin/news');
     }
@@ -75,21 +58,17 @@ class NewsController extends Controller
      */
     public function show( $id)
     {
-        
-
-        //$news=\DB::table('news')->select('title','body','Autor','date','updatefor')->where ('id','=',$id)->get();
-        // $news=\DB::table('news')->join('article', function($join,$id)
-        // {
-        //     $join->on('news.id','=','article.newsid')->where('article.newsid','=',$id);
-        // });
-
+        /* $categories = categorys::active()->get(); */
+        $users = User::get();
         $news=\DB::table('news')
         ->join('users', 'users.id', '=','news.Autor')
-        ->select('news.id','news.title', 'users.name','news.date', 'news.updatefor','news.updated_at')
+        ->join('categorys', 'categorys.id', '=', 'news.category_id')
+        ->select('news.id','news.title', 'users.name','news.date', 'news.updatefor','news.updated_at', 'news.category_id', 'categorys.nombre')
         ->where ('news.id','=',$id)
         ->get();
 
-        return view('admin.news.show',compact('news'));
+        session()->flashInput($news->toArray());
+        return view('admin.news.show',compact('news', 'users', 'categories'));
     }
 
     /**
@@ -98,10 +77,12 @@ class NewsController extends Controller
      * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit(news $news)
     {
-        $news=news::findOrfail($id);
-        return view('admin.news.edit',compact('news'));
+        /* $categories = categorys::active()->get(); */
+        /* $news=news::findOrfail($id); */
+        session()->flashInput($news->toArray());
+        return view('admin.news.edit',compact('news'/* , 'categories' */));
     }
 
     /**
@@ -111,14 +92,11 @@ class NewsController extends Controller
      * @param  \App\news $news_article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $new)
+    public function update(Request $request, news $news)
     {
-        $news=request()->except('_token','_method','_send');
-
-        news::where('id','=',$new)->update($news);
-
+        $news->update($this->validateFields($request));
+        $news->save();
         $request->session()->flash("flash_message","La Noticia fue actualizada de manera satisfactoria!");
-
         return redirect('/admin/news');
     }
 
@@ -141,7 +119,9 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'title' => 'required|min:15|max:60',
-                'body' => 'required'
+                'Autor' => '',
+                'body' => 'required',
+                'date' => ''
                 
             ],
             [

@@ -22,12 +22,11 @@
                         </thead>
 
                         <tbody>
-                            
-                       
                             <tr>
                                
                                 <td>  ID </td>
                                 <td> {{ $news [0]->id }} </td>
+
                             </tr>
                             <tr>
                                
@@ -35,6 +34,16 @@
                                 <td> {{ $news [0]->title }}  </td>
                                 
                             </tr>
+                            {{-- <tr>
+                               
+                                @foreach ($categories as $category)
+                                    @if ($category->id == $news [0]->category_id)
+                                        <td> Categoría</td>
+                                        <td> {{ $category->nombre }}   </td>
+                                    @endif
+                                @endforeach
+                                
+                            </tr> --}}
                             <tr>
                                
                                 <td>  Autor </td>
@@ -48,24 +57,26 @@
                                 
                             </tr>
                              <tr>
-                               
-                                <td> ID de usuario que actualizo</td>
-                                <td> {{ $news [0]->updatefor }}   </td>
-                                
+
+                               @foreach ($users as $user)
+                                    @if ($user->id == $news [0]->updatefor)
+                                        <td> Usuario actualizó</td>
+                                        <td> {{ $user->name }}   </td>
+                
                             </tr>
                             <tr>
-                               
-                                <td>  Fecha de Actualizacion </td>
+                                <td>  Fecha de Actualización </td>
                                 <td> {{$news [0]->updated_at}}  </td>
-                                
                             </tr>
-                           
-
-                           
-                           
-
+                                    @endif
+                                @endforeach
                         </tbody>
                     </table>
+                    <div class="form-group">
+                        <div class="controls">
+                            <a href="{{ url('/admin/news') }}" class="btn-cancel1">Regresar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

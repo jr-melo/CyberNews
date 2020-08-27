@@ -14,6 +14,7 @@ class newsseeder extends Seeder
         DB::table('news')->insert([
             'id'=>1,
             'Autor'=>'1',
+            /* 'category_id' => 1, */
             'title'=> 'Laura azota RD',
             'body'=>'LOREMIMPUT',
             'updatefor'=>2,
