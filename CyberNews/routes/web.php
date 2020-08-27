@@ -29,4 +29,5 @@ Route::get('/admin', function () {
 Route::resource('/admin/users', 'UsersController');
 Route::resource('/admin/roles', 'RolesController');
 Route::resource('/admin/permissions', 'PermissionsController');
+Route::resource('/admin/news', 'NewsController');
 Route::resource('/admin/category','CategorysController');

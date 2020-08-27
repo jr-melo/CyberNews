@@ -13,6 +13,10 @@ class categorysTableSeeder extends Seeder
     {
         DB::table('categorys')->insert([
             'nombre'=>'Deportes',
-            'descripcion' => 'seccion de deportes',]);
+            'descripcion' => 'seccion de deportes',
+        ]);
+        $categorys = factory(App\categorys::class, 10)->create();
     }
+
+    
 }
