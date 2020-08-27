@@ -22,20 +22,22 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-          <a href="{{-- {{ url('/news' . $news->id ) }} --}}">
-            <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
-            </h2>
-            <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
-            </h3>
-          </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-            on September 24, 2019</p>
-        </div>
-        <hr>
+
+        {{-- @foreach ($news as $article)
+          <div class="post-preview">
+            <a href="{{ url('/news/' . $article->id ) }}">
+              <h2 class="post-title">
+                {{ $article->title }}
+              </h2>
+            </a>
+            <p class="post-meta">Posted by
+              {{ $article->author }}
+              on {{ $article->date }}</p>
+          </div>
+          <hr> 
+        @endforeach --}}
+        
+        <!-- División -->
         <div class="post-preview">
           <a href="post.html">
             <h2 class="post-title">
@@ -43,7 +45,7 @@
             </h2>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
+            Start Bootstrap
             on September 18, 2019</p>
         </div>
         <hr>
@@ -52,9 +54,6 @@
             <h2 class="post-title">
               Science has not yet mastered prophecy
             </h2>
-            <h3 class="post-subtitle">
-              We predict too much for the next year and yet far too little for the next ten.
-            </h3>
           </a>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
@@ -65,10 +64,7 @@
           <a href="post.html">
             <h2 class="post-title">
               Failure is not an option
-            </h2>
-            <h3 class="post-subtitle">
-              Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-            </h3>
+            </h2>{{--  --}}
           </a>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
@@ -77,7 +73,7 @@
         <hr>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <a class="btn btn-primary float-right" href="{{ url('/posts') }}">Publicaciones Anteriores &rarr;</a>
         </div>
       </div>
     </div>

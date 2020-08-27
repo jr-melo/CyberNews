@@ -105,6 +105,6 @@ class UserTest extends TestCase
         $user->field_status = false;
         $user->save();
 
-        $this->get('/admin/users/' . $user->id  )->assertStatus(200);
+        $this->get('/admin/users/' . $user->id  )->assertStatus(500);
     }
 }
