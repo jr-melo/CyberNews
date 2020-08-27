@@ -19,19 +19,15 @@ class CreateNewsTable extends Migration
             $table->unsignedBigInteger('Autor');
             $table->date('date');
             $table->string('title');
+            $table->longText('body');
             $table->foreign('Autor')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('updatefor')->nullable();
             $table->boolean('field_status')->default(true);
+           
             $table->timestamps();
         });
         
-        Schema::create('article', function (Blueprint $table) {
-
-            $table->unsignedBigInteger('newsid');
-           
-            $table->longText('article');
-            $table->foreign('newsid')->references('id')->on('news')->onDelete('cascade');
-            $table->timestamps();
-        });
+      
     }
 
     /**
@@ -42,6 +38,6 @@ class CreateNewsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('news');
-        Schema::dropIfExists('article');
+        
     }
 }

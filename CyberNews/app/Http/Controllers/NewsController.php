@@ -27,8 +27,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $news=\DB::select('SELECT MAX(id+1) as id FROM news');
-        return view('admin.news.create',compact('news'));
+        
+        return view('admin.news.create');
     }
 
     /**
@@ -42,29 +42,29 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'title' => 'required|min:15|max:60',
-                'article' => 'required'
+                'body' => 'required'
                 
             ],
             [
                 'title.required' => 'Por favor introduzca un titulo.',
                 'title.min' => 'Esto no parece un titulo muy descriptivo.',
                 'title.max' => 'Su titulo es un poco largo.',
-                'article.required'=>'Introduzca el contenido por favor'
+                'body.required'=>'Introduzca el contenido por favor'
             ]
         );
 
         $news = new News($request->all());
         \DB::table('news')->insert(['title'=>$news->title, 'Autor'=>$news->Autor,
         
-                                        'date'=>$news->date]);
+        'body'=>$news->body, 'date'=>$news->date]);
         
         
-         \DB::table('article')->insert(['newsid'=>$news->newsid,'article'=>$news->article]);
+         
             
           
             
         $request->session()->flash("flash_message", "Registro Creado con Éxito");
-        return view('admin.news.index');
+        return  redirect('/admin/news');
     }
 
     /**
@@ -73,9 +73,23 @@ class NewsController extends Controller
      * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function show(news $news_article)
+    public function show( $id)
     {
-        //
+        
+
+        //$news=\DB::table('news')->select('title','body','Autor','date','updatefor')->where ('id','=',$id)->get();
+        // $news=\DB::table('news')->join('article', function($join,$id)
+        // {
+        //     $join->on('news.id','=','article.newsid')->where('article.newsid','=',$id);
+        // });
+
+        $news=\DB::table('news')
+        ->join('users', 'users.id', '=','news.Autor')
+        ->select('news.id','news.title', 'users.name','news.date', 'news.updatefor','news.updated_at')
+        ->where ('news.id','=',$id)
+        ->get();
+
+        return view('admin.news.show',compact('news'));
     }
 
     /**
@@ -84,9 +98,10 @@ class NewsController extends Controller
      * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function edit(news $news_article)
+    public function edit( $id)
     {
-        //
+        $news=news::findOrfail($id);
+        return view('admin.news.edit',compact('news'));
     }
 
     /**
@@ -96,9 +111,15 @@ class NewsController extends Controller
      * @param  \App\news $news_article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, news $news_article)
+    public function update(Request $request,  $new)
     {
-        //
+        $news=request()->except('_token','_method','_send');
+
+        news::where('id','=',$new)->update($news);
+
+        $request->session()->flash("flash_message","La Noticia fue actualizada de manera satisfactoria!");
+
+        return redirect('/admin/news');
     }
 
     /**
@@ -107,9 +128,12 @@ class NewsController extends Controller
      * @param  \App\news  $news_article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(news $news_article)
+    public function destroy(news $news)
     {
-        //
+        \DB::table('news')
+        ->where('id', $news->id)
+        ->update(['field_status' => 0]);
+        return redirect('/admin/news');
     }
 
 
@@ -117,14 +141,14 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'title' => 'required|min:15|max:60',
-                'article' => 'required'
+                'body' => 'required'
                 
             ],
             [
                 'title.required' => 'Por favor introduzca un titulo.',
                 'title.min' => 'Esto no parece un titulo muy descriptivo.',
                 'title.max' => 'Su titulo es un poco largo.',
-                'article.required'=>'Introduzca el contenido por favor'
+                'body.required'=>'Introduzca el contenido por favor'
             ]
 
         );

@@ -15,6 +15,8 @@ class newsseeder extends Seeder
             'id'=>1,
             'Autor'=>'1',
             'title'=> 'Laura azota RD',
+            'body'=>'LOREMIMPUT',
+            'updatefor'=>2,
             'date'=>now(),
 
 

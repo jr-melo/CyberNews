@@ -11,6 +11,7 @@ $factory->define(news::class, function (Faker $faker) {
         'title' => $faker->title(),
         'Autor' => 2,
         'date' => now(),
+        'body'=>$faker->text(),
         'field_status' => 1, 
         'created_at' => now(),
     ];

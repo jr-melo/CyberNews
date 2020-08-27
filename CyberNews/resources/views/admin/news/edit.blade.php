@@ -19,7 +19,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                    <h2><center>Redactar Noticias </center></h2>
+                    <h2><center>Editar Noticias </center></h2>
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
@@ -32,14 +32,30 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form" id="news" name="news" method="post" action="{{ url('/admin/news') }}">
-                        @method('POST')
-                        @csrf
-                        @include('admin.news.fields')       
+                    <form role="form" id="news" name="news" method="post" action="{{ url('/admin/news/' . $news->id) }}">
+                      @method('PATCH')
+                      @csrf
                         <div class="form-group">
-                            <div class="controls">
+                          <div class="controls">
+                              
+                            <input class="form-control" required type="text" name="title" id="title" placeholder="Editar Titulo." value="<?php echo $news->title?>"/>
+                            <div id="errusername"></div>
+                            <input type="hidden" value={{(Auth::user()->id)}} name="updatefor" id="updatefor">
+                          </div>
+                      </div>
+                     
+                      <div class="controls">
+                          
+                        <textarea  class="form-control" required name="body" id="body">  <?=$news->body?> </textarea> 
+                           
+                           
+                          <div id="erremail"></div>
+                      </div>
+                      <div class="form-group">
+                         
+                      </div>
                                 <a href="{{ url('/admin/news') }}" class="btn-cancel1">Cancelar</a>
-                                <input class="btn-send1" type="submit" name="send" id="send" value="Grabar"/>
+                                <input class="btn-send1" type="submit" value="Grabar"/>
                             </div>
                         </div>             
                     </form>
@@ -70,7 +86,7 @@
             required: true
           },
           
-         body:{
+         article:{
              required: true,
          }
 
@@ -79,7 +95,7 @@
           title: {
             required: "Por favor introduzca un Titulo."
           },
-          body: {
+          article: {
             required: "Por favor introduzca un articulo.",
            
           },
@@ -101,3 +117,6 @@
 </script>
 
 @endsection
+
+
+
