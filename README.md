@@ -1,4 +1,4 @@
-## Sobre CyberNews 
+## Sobre CyberNews [![Build Status](https://travis-ci.com/jr-melo/CyberNews.svg?branch=master)](https://travis-ci.com/jr-melo/CyberNews)
 
 CyberNews es un portal web dedicado a la constante publicación e información de noticias, también conocido como un periódico digital.
 
