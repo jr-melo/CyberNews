@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - 7.4
+
+services:
+  - mysql
+
+before_script:
+  - cp .env.travis .env
+  - sudo mysql -e 'CREATE DATABASE testing;'
+  - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate:fresh --seed
+
+cache:
+  directories:
+    - vendor
+
+test:
+  adapter: sqlite3
+  database: ":memory:"
+  timeout: 500
