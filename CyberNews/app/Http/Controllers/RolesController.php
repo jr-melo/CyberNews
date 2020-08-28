@@ -99,11 +99,11 @@ class RolesController extends Controller
 
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'rolname' => 'required',
                 'description' => 'required',
             ],
             [
-                'name.required' => 'El nombre es requerido.',
+                'rolname.required' => 'El nombre es requerido.',
                 'description.required' => 'La descripción es requerida.',
             ]
         );

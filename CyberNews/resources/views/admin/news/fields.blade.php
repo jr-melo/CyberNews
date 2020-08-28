@@ -21,7 +21,8 @@
             <option value="{{$category->id}}" >{{$category->nombre}}</option>
         @endforeach
     </select>
-  </div>
+</div>
+
 <div class="form-group">
     <input type="hidden" value={{(Auth::user()->id)}} name="Autor" id="Autor">
     <input type="hidden" value={{(now())}} name="created_at" id="created_at">

@@ -23,7 +23,7 @@
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                    <script>alert( {{ $error }} )</script>
+                      <strong>Error! </strong> {{ $error }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -73,6 +73,9 @@
             required: true,
             email: true,
           },
+          role_id: {
+            required: true
+          },
           password: {
             required: true,
             minlength: 8,
@@ -91,6 +94,9 @@
           email: {
             required: "Por favor introduzca su correo electrónico.",
             email: "Por favor introduzca un correo electrónico válido."
+          },
+          role_id: {
+            required: "Por favor seleccione un rol."
           },
           password: {
             required: "Por favor introduzca una contraseña",

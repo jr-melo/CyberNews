@@ -23,7 +23,7 @@
                 </div>
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert" >
-                    <script>alert( {{ $error }} )</script>
+                      <strong>Error! </strong> {{ $error }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -67,7 +67,7 @@
     });
     $('#roles').validate({
       rules: {
-        name: {
+        rolname: {
           required: true
         },
         description: {
@@ -76,7 +76,7 @@
 
       },
       messages: {
-        name: {
+        rolname: {
           required: "Por favor introduzca un nombre."
         },
         email: {

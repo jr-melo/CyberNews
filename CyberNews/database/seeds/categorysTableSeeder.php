@@ -13,9 +13,29 @@ class categorysTableSeeder extends Seeder
     {
         DB::table('categorys')->insert([
             'nombre'=>'Deportes',
-            'descripcion' => 'seccion de deportes',
+            'descripcion' => 'Sección de deportes',
         ]);
-        $categorys = factory(App\categorys::class, 4)->create();
+
+        DB::table('categorys')->insert([
+            'nombre'=>'Tecnología',
+            'descripcion' => 'Sección de tecnología',
+        ]);
+
+        DB::table('categorys')->insert([
+            'nombre'=>'Música',
+            'descripcion' => 'Sección de música',
+        ]);
+
+        DB::table('categorys')->insert([
+            'nombre'=>'El País',
+            'descripcion' => 'Sección dedicada a noticias nacionales que corresponden a la República Dominicana.',
+        ]);
+
+        DB::table('categorys')->insert([
+            'nombre'=>'Internacionales',
+            'descripcion' => 'Sección de internacionales.',
+        ]);
+        
     }
 
     

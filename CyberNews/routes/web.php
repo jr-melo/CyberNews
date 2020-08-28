@@ -13,21 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/', 'MainPageController');
+Route::resource('/posts','MainPageController');
+Route::resource('/categories','CategoriesPageController');
+Route::resource('/categories/news','CategoriesPageController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/* Route::get('/home', 'HomeController@index')->name('home'); */
 
-Route::get('/admin', function () {
+Route::get('/admin', 'AdminController@index')->name('admin');
+
+/* Route::get('/admin', function () {
     return view('admin.dashboard');
 
-})->name('admin');
+})->name('admin'); */
 
 Route::resource('/admin/users', 'UsersController');
 Route::resource('/admin/roles', 'RolesController');
 Route::resource('/admin/permissions', 'PermissionsController');
 Route::resource('/admin/news', 'NewsController');
 Route::resource('/admin/category','CategorysController');
+
+/* Route::get('/categories', function () {
+    return view('/pages/categories');
+}); */
+
+Route::get('/about', function () {
+    return view('/pages/about');
+});
+
+Route::get('/contact', function () {
+    return view('/pages/contact');
+});
+

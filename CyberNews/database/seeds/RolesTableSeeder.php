@@ -12,22 +12,22 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
-            'name' => 'sysadmin',
+            'rolname' => 'sysadmin',
             'description' => 'Administrador del sistema.',
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'dbmanager',
+            'rolname' => 'dbmanager',
             'description' => 'Gestor de Base de Datos.',
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'mng-salesman',
-            'description' => 'Gerente de Ventas.',
+            'rolname' => 'guest',
+            'description' => 'visitante',
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'designer',
+            'rolname' => 'designer',
             'description' => 'Diseñador Principal.',
         ]);
     }

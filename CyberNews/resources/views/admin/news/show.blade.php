@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 
+@section('header_content')
+  <div class="col-sm-6">
+    <h1 class="m-0 text-dark">Noticias</h1>
+  </div><!-- /.col -->
+  <div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+      <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
+      <li class="breadcrumb-item active">Noticias</li>
+    </ol>
+  </div><!-- /.col -->
+@endsection
+
 @section('main_content')
     <div class="container d-flex justify-content-between">
         <div>
@@ -72,6 +84,7 @@
                     </table>
                     <div class="form-group">
                         <div class="controls">
+                            <br>
                             <a href="{{ url('/admin/news') }}" class="btn-cancel1">Regresar</a>
                         </div>
                     </div>

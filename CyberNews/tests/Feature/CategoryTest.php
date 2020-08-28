@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\categorys;
 use App\Role;
+use categorysTableSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,9 +23,9 @@ class CategoryTest extends TestCase
         $category = factory(categorys::class)->create();
         $this->be(factory('App\User')->create());
         
-        $this->get('/admin/categorys/create')->assertStatus(200);
+        $this->get('/admin/category/create')->assertStatus(200);
 
-        $this->post('/admin/categorys',$category->toArray())->assertRedirect('/admin/categorys');
+        $this->post('/admin/category',$category->toArray())->assertRedirect('/admin/category');
 
         $this->assertDatabaseHas('categorys', $category->toArray());
     }
@@ -40,7 +41,7 @@ class CategoryTest extends TestCase
         $role = factory(Role::class)->create();
         $this->be(factory('App\User')->create());
 
-        $this->get('/admin/categorys')->assertSee($category->nombre);
+        $this->get('/admin/category')->assertSee($category->nombre);
     }
 
     /**
@@ -53,7 +54,7 @@ class CategoryTest extends TestCase
         $role = factory(Role::class)->create();
         $this->be(factory('App\User')->create());
 
-        $this->get('/admin/categorys/'. $category->id )->assertSee($category->nombre);
+        $this->get('/admin/category/'. $category->id )->assertSee($category->nombre);
     }
 
     /**
@@ -66,13 +67,13 @@ class CategoryTest extends TestCase
         $role = factory(Role::class)->create();
         $this->be(factory('App\User')->create());
         
-        $this->get('/admin/categorys/'. $category->id . '/edit')->assertSee($category->nombre);
+        $this->get('/admin/category/'. $category->id . '/edit')->assertSee($category->nombre);
 
-        $category->nombre = $this->faker->usernombre;
-        $category->description = $this->faker->sentence();
+        $category->nombre = $this->faker->userName;
+        $category->descripcion = $this->faker->sentence();
         $category->save();
 
-        $this->get('/admin/categorys/'. $category->id . '/edit')->assertSee($category->nombre);
+        $this->get('/admin/category/'. $category->id . '/edit')->assertSee($category->nombre);
     }
 
     /**
@@ -85,11 +86,11 @@ class CategoryTest extends TestCase
         $role = factory(Role::class)->create();
         $this->be(factory('App\User')->create());
         
-        $this->get('/admin/categorys/' . $category->id  )->assertSee($category->nombre);
+        $this->get('/admin/category/' . $category->id  )->assertSee($category->nombre);
 
         $category->field_status = false;
         $category->save();
 
-        $this->get('/admin/categorys/' . $category->id  )->assertStatus(200);
+        $this->get('/admin/category/' . $category->id  )->assertStatus(200);
     }
 }

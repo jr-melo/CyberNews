@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <div class="controls">
                                 <label for="name"> Nombre de Usuario: </label>
-                                <input class="form-control" required type="text" readonly name="name" id="name" placeholder="Introducir usuario."
+                                <input class="form-control" required type="text" readonly name="name" id="name" placeholder="Vacío."
                                 value="{{ old('name') }}"/>
                                 <div id="errusername"></div>
                             </div>
@@ -39,11 +39,25 @@
                         <div class="form-group">
                             <div class="controls">
                                 <label for="email"> Email: </label>
-                                <input class="form-control" required type="text" readonly name="email" id="email" placeholder="Introducir correo."
+                                <input class="form-control" required type="text" readonly name="email" id="email" placeholder="Vacío."
                                 value="{{ old('email') }}" />
                                 <div id="erremail"></div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                          <div class="controls">
+                              <label for="rolname"> Rol: </label>
+                              <input class="form-control" required type="text" readonly name="rolname" id="rolname" placeholder="Vacío."
+                              @foreach ($roles as $role)
+                                @if($role->id == $user->role_id)
+                                  value="{{$role->rolname}}" />
+                                @endif
+                              @endforeach
+                              <div id="errrolname"></div>
+                          </div>
+                      </div>
+
                         <div class="form-group">
                             <div class="controls">
                                 <a href="{{ url('/admin/users') }}" class="btn-cancel1">Regresar</a>

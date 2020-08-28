@@ -1,8 +1,8 @@
 <div class="form-group">
     <div class="controls">
-        <label for="name"> Nombre de Rol: </label>
-        <input class="form-control" required type="text" name="name" id="name" placeholder="Introducir rol."
-        value="{{ old('name') }}"/>
+        <label for="rolname"> Nombre de Rol: </label>
+        <input class="form-control" required type="text" name="rolname" id="rolname" placeholder="Introducir rol."
+        value="{{ old('rolname') }}"/>
         <div id="errrolname"></div>
     </div>
 </div>
