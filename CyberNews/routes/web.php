@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('/pages/mainpage');
-});
+Route::resource('/', 'MainPageController');
+Route::resource('/posts','MainPageController');
+Route::resource('/categories','CategoriesPageController');
+Route::resource('/categories/news','CategoriesPageController');
 
 Auth::routes();
 
@@ -34,9 +35,9 @@ Route::resource('/admin/permissions', 'PermissionsController');
 Route::resource('/admin/news', 'NewsController');
 Route::resource('/admin/category','CategorysController');
 
-Route::get('/posts', function () {
-    return view('/pages/posts');
-});
+/* Route::get('/categories', function () {
+    return view('/pages/categories');
+}); */
 
 Route::get('/about', function () {
     return view('/pages/about');

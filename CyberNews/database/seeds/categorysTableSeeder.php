@@ -27,8 +27,8 @@ class categorysTableSeeder extends Seeder
         ]);
 
         DB::table('categorys')->insert([
-            'nombre'=>'Gobierno',
-            'descripcion' => 'Sección de gobierno.',
+            'nombre'=>'El País',
+            'descripcion' => 'Sección dedicada a noticias nacionales que corresponden a la República Dominicana.',
         ]);
 
         DB::table('categorys')->insert([

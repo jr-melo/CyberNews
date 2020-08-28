@@ -11,6 +11,7 @@
 
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('dist/css/clean-blog.min.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('dist/css/modern-business.css') }}"> --}}
 
          <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">

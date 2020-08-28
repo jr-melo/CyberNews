@@ -123,7 +123,7 @@
         <!-- /.container-fluid -->
       </section>
       <!-- /.content -->
-</div>
+{{-- </div> --}}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 

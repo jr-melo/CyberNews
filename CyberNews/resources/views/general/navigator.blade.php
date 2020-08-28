@@ -32,7 +32,7 @@
             <a class="nav-link" href="{{ url('/') }}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/posts') }}">Publicaciones</a>
+            <a class="nav-link" href="{{ url('/categories') }}">Publicaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/about') }}">Nosotros</a>

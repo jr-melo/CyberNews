@@ -2,7 +2,7 @@
 
 @section('page_header')
      <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{ asset("dist/img/news3.jpg") }}')">
+  <header class="masthead" style="background-image: url('{{ asset("dist/img/home-bg.jpg") }}')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -20,7 +20,7 @@
 @section('page_content')  
   <!-- Main Content -->
   <div class="container">
-    <br><h1 style="color:rgb(163, 41, 41)">Últimas Noticias</h1> <hr>
+  <br><h1 style="color:rgb(163, 41, 41)"> Noticias de la Sección</h1> <hr>
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         @foreach ($news as $new)
@@ -36,13 +36,21 @@
           </div>
           <hr> 
         @endforeach
+        <div class="custom-pagination">{{ $news->links() }}</div>
+        <hr>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{ url('/categories') }}">Publicaciones Anteriores &rarr;</a>
+          <a class="btn btn-primary float-left" href="{{ url('/categories') }}">&larr; Regresar</a>
         </div>
       </div>
     </div>
   </div>
   <hr>
   @endsection
+
+  <style>
+    .pagination{
+      justify-content: center;
+    }
+  </style>
 

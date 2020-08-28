@@ -2,7 +2,7 @@
 
 @section('page_header')
      <!-- Page Header -->
-  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('{{ asset("dist/img/contact-bg.jpg") }}')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -56,7 +56,7 @@
           </div>
           <br>
           <div id="success"></div>
-          <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+          <button type="submit" class="btn btn-primary" id="sendMessageButton">Enviar</button>
         </form>
       </div>
     </div>
