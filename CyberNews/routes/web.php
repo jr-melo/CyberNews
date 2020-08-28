@@ -31,6 +31,8 @@ Route::get('/admin', 'AdminController@index')->name('admin');
 Route::resource('/admin/users', 'UsersController');
 Route::resource('/admin/roles', 'RolesController');
 Route::resource('/admin/permissions', 'PermissionsController');
+Route::resource('/admin/news', 'NewsController');
+Route::resource('/admin/category','CategorysController');
 
 Route::get('/posts', function () {
     return view('/pages/posts');
@@ -43,3 +45,4 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('/pages/contact');
 });
+

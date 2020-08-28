@@ -61,6 +61,22 @@
                 </a>
               </li>
             </ul>
+            <li class="nav-item">
+              <a href="{{ url('/admin/news') }}" class="nav-link">
+                <i class="far fa-newspaper"></i>
+                <p>
+                  Noticias 
+                </p>
+              </a>
+            </li>
+              <li class="nav-item">
+                <a href="{{ url('/admin/category') }}" class="nav-link">
+                  <i class="fab fa-buffer"></i>
+                  <p>
+                    Categorías
+                  </p>
+                </a>
+              </li>
           <li class="nav-header">Accesorios</li>
           <li class="nav-item">
             <a href="{{ url('/admin/calendar') }}" class="nav-link">
@@ -85,7 +101,7 @@
               <p>Documentation</p>
             </a>
           </li>
-          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <br><br><br><br><br><br><br><br><br><br><br>
           <li class="nav-item">
             <a class="dropdown-item" href="{{ url('/') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="fas fa-sign-out-alt"></i> {{ __('Cerrar Sesión') }}

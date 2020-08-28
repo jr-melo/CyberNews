@@ -2,7 +2,7 @@
 
 @section('header_content')
   <div class="col-sm-6">
-    <h1 class="m-0 text-dark">Usuarios</h1>
+    <h1 class="m-0 text-dark">Noticias</h1>
   </div><!-- /.col -->
   <div class="col-sm-6">
     <ol class="breadcrumb float-sm-right">
@@ -11,7 +11,6 @@
     </ol>
   </div><!-- /.col -->
 @endsection
-
 @section('main_content')
     <!-- Main content -->
     <section class="content">
@@ -30,8 +29,8 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                    <a class="btn bg-gradient-success" href="{{ url('/admin/users/create') }}"
-                      role="button">Crear Nuevo Usuario</a>
+                    <a class="btn bg-gradient-success" href="{{ url('/admin/news/create') }}"
+                      role="button">Crear Noticias</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -39,44 +38,42 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Correo electrónico</th>
-                            <th>Rol</th>
+                            <th>Titular</th>
+                            <th>Autor</th>
+                            <th>Categoría</th>
+                            <th>Fecha Creación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach ($users as $user)
+                      @foreach ($news as $new)
                           <tr>
-                              <td>{{ $user->id }}</td>
-                              <td>{{ $user->name }}</td>
-                              <td>{{ $user->email}} </td>
-                              <td>{{ $user->rolname}} </td>
+                              <td>{{ $new->id }}</td>
+                              <td>{{  $new->title }}</td>
+                              <td>{{  $new->name}} </td>
+                              <td>{{  $new->nombre}} </td>
+                              <td>{{  $new->created_at}} </td>
+                              
                               <td>
                                   <div class="d-flex">
                                     <ul class="list-inline center mx-auto justify-content-center m-0">
                                         <li class="list-inline-item">
                                           <a class="nav-link" 
-                                            href="{{ url('/admin/users/' . $user->id ) }}"
+                                            href="{{ url('/admin/news/' . $new->id ) }}"
                                             role="button"><i class="fas fa-book-open"></i></a>
                                         </li>
                                         <li class="list-inline-item">
                                           <a class="nav-link"
-                                            href="{{ url('/admin/users/' . $user->id ) . '/edit' }}"
+                                            href="{{ url('/admin/news/' . $new->id ) . '/edit' }}"
                                             role="button"><i class="fas fa-edit"></i></a>
                                         </li>
-                                          {{-- <li class="list-inline-item">
-                                            <a class="nav-link"
-                                               href="{{ url('/admin/users/' . $user->id ) . '/delete' }}"
-                                               role="button"><i class="fas fa-trash-alt"></i></a>
-                                          </li> --}}
                                         <li class="list-inline-item">
                                           <a class="nav-link" href="#" role="button"
-                                            onclick="deleteModelRecord({{$user->id}})"><i
+                                            onclick="deleteModelRecord({{$new->id}})"><i
                                             class="fas fa-trash-alt"></i></a>
                                           <pre delete-dialog-model="deleteModelRecord" class="d-none">
 
-                                            <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/users/')}}" method="POST">
+                                            <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/news/')}}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                             </form>
