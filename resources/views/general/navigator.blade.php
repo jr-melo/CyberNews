@@ -1,17 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <!-- Navigation -->
-
         <a class="navbar-brand" href="{{ url('/') }}">CyberNews</a>
         <li class="nav-item has-treeview list-unstyled">
-            <button href="#" onclick="myFunction()" class="dropbtn navbar-toggler navbar-toggler-right" type="button"
-                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            {{-- <div id="myDropdown" class=" collapse navbar-collapse navbar-toggler-right navbar-responsive"> --}}
-            {{-- <div id="myDropdown" class="dropdown-content"> --}}
+
+            <!-- Nav menu responsive -->
+            <div class="dropdown">
+                <button class="dropbtn navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="dropdown-content">
+                    <ul class="nav nav-treeview navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/') }}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/categories') }}">Publicaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/about') }}">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/contact') }}">Contacto</a>
+                        </li>
+                        @if (Route::has('login'))
+                            <!-- <div class="top-right links"> -->
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                </li>
+                            @endauth
+                            <!-- </div> -->
+                        @endif
+                        <!-- </ul> -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Nav no responsive -->
             <div class="collapse navbar-collapse" id="myDropdown">
                 <ul class="nav nav-treeview navbar-nav ml-auto">
                     <li class="nav-item">
@@ -52,53 +95,6 @@
                 </ul>
             </div>
         </li>
-        {{-- <li class="nav-item has-treeview list-unstyled">
-            <a href="#" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </a>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="nav nav-treeview navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/categories') }}">Publicaciones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/about') }}">Nosotros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/contact') }}">Contacto</a>
-                    </li>
-                    @if (Route::has('login'))
-                        <!-- <div class="top-right links"> -->
-                        @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                            </li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                            </li>
-                        @endauth
-                        <!-- </div> -->
-                    @endif
-                    <!-- </ul> -->
-                </ul>
-            </div>
-        </li> --}}
     </div>
 </nav>
 
@@ -185,15 +181,10 @@ toggle between hiding and showing the dropdown content */
         color: white;
         padding: 16px;
         font-size: 16px;
-        border-color: #636b6f;
-        border: 10px cursor: pointer;
-    }
-
-
-    /* Dropdown button on hover & focus */
-    .dropbtn:hover,
-    .dropbtn:focus {
-        background-color: #677e8d;
+        border-width: 1px;
+        border-style:double;
+        margin-right: 45px;
+        
     }
 
     /* The container <div> - needed to position the dropdown content */
@@ -207,29 +198,35 @@ toggle between hiding and showing the dropdown content */
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 160px;
+        min-width: 130px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
+        
     }
-
 
     /* Links inside the dropdown */
     .dropdown-content a {
         color: black;
-        padding: 12px 16px;
+        padding: 10px 10px;
         text-decoration: none;
         display: block;
+        text-align: center;
+        
     }
 
     /* Change color of dropdown links on hover */
     .dropdown-content a:hover {
-        background-color: #ddd
+        background-color: #ddd;
     }
 
-
-    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-    .show {
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
         display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #748d91;
     }
 
 </style>
