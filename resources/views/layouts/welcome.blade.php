@@ -46,7 +46,7 @@
     <script src="{{ asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="{{ asset('public/dis/js/cleanblog/clean-blog.min.js') }}"></script>
+    <script src="{{ asset('public/dist/js/cleanblog/clean-blog.min.js') }}"></script>
   
 </body>
 

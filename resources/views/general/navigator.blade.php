@@ -3,7 +3,56 @@
         <!-- Navigation -->
 
         <a class="navbar-brand" href="{{ url('/') }}">CyberNews</a>
-        <!--<li class="nav-item has-treeview list-unstyled">
+        <li class="nav-item has-treeview list-unstyled">
+            <button href="#" onclick="myFunction()" class="dropbtn navbar-toggler navbar-toggler-right" type="button"
+                data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            {{-- <div id="myDropdown" class=" collapse navbar-collapse navbar-toggler-right navbar-responsive"> --}}
+            {{-- <div id="myDropdown" class="dropdown-content"> --}}
+            <div class="collapse navbar-collapse" id="myDropdown">
+                <ul class="nav nav-treeview navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/') }}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/categories') }}">Publicaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/about') }}">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/contact') }}">Contacto</a>
+                    </li>
+                    @if (Route::has('login'))
+                        <!-- <div class="top-right links"> -->
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            </li>
+                        @endauth
+                        <!-- </div> -->
+                    @endif
+                    <!-- </ul> -->
+                </ul>
+            </div>
+        </li>
+        {{-- <li class="nav-item has-treeview list-unstyled">
             <a href="#" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -25,7 +74,7 @@
                         <a class="nav-link" href="{{ url('/contact') }}">Contacto</a>
                     </li>
                     @if (Route::has('login'))
-                        {{-- <div class="top-right links"> --}}
+                        <!-- <div class="top-right links"> -->
                         @auth
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
@@ -44,15 +93,36 @@
                                 <a class="nav-link" href="{{ route('login') }}">Login</a>
                             </li>
                         @endauth
-                        {{-- </div> --}}
+                        <!-- </div> -->
                     @endif
-                    {{-- </ul> --}}
+                    <!-- </ul> -->
                 </ul>
             </div>
-
-        </li> -->
+        </li> --}}
     </div>
 </nav>
+
+<script>
+    /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
 
 <!-- Styles -->
 <style>
@@ -106,6 +176,60 @@
 
     .m-b-md {
         margin-bottom: 30px;
+    }
+
+
+    /* Dropdown Button */
+    .dropbtn {
+        background-color: #ffffff;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border-color: #636b6f;
+        border: 10px cursor: pointer;
+    }
+
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover,
+    .dropbtn:focus {
+        background-color: #677e8d;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {
+        background-color: #ddd
+    }
+
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
     }
 
 </style>
