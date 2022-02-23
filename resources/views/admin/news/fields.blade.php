@@ -23,6 +23,13 @@
     </select>
 </div>
 
+<div class="form-group">  <!-- Imagen -->
+    <div class="controls">
+      <label for="news_image"> Imagen: </label>
+      <input class="form-control" type="text" name="news_image" id="news_image"/>
+    </div>
+  </div>
+
 <div class="form-group">
     <input type="hidden" value={{(Auth::user()->id)}} name="Autor" id="Autor">
     <input type="hidden" value={{(now())}} name="created_at" id="created_at">

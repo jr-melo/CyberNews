@@ -68,7 +68,7 @@ class NewsController extends Controller
         $news=\DB::table('news')
         ->join('users', 'users.id', '=','news.Autor')
         ->join('categorys', 'categorys.id', '=', 'news.category_id')
-        ->select('news.id','news.title', 'users.name','news.created_at', 'news.updatefor','news.updated_at', 'news.category_id', 'categorys.nombre')
+        ->select('news.id','news.title', 'users.name','news.created_at', 'news.updatefor','news.updated_at', 'news.category_id', 'categorys.nombre', 'news.news_image')
         ->where ('news.id','=',$id)
         ->get();
 
@@ -128,6 +128,7 @@ class NewsController extends Controller
                 'body' => 'required',
                 'category_id' => 'required|numeric',
                 'updatefor'=> '',
+                'news_image'=> '',
                 
             ],
             [

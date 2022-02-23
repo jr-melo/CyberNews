@@ -20,16 +20,18 @@ class CreateNewsTable extends Migration
             /* $table->date('date'); */
             $table->unsignedBigInteger('Autor');
             $table->unsignedBigInteger('category_id');
+            /* $table ->longText('news_image'); */
             $table->unsignedBigInteger('updatefor')->nullable();
             $table->boolean('field_status')->default(true);
             $table->timestamps();
-            
 
             //Relations
             $table->foreign('Autor')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('updatefor')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categorys')->onDelete('cascade');
         });
+
+        DB::statement("ALTER TABLE news ADD news_image LONGBLOB NULL");  /* Image Column */
         
       
     }

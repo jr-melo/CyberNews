@@ -60,6 +60,13 @@
                       </div>
                       
                       <input type="hidden" value={{(Auth::user()->id)}} name="updatefor" id="updatefor">
+
+                      <div class="form-group">  <!-- Imagen -->
+                        <div class="controls">
+                          <label for="news_image"> Imagen: </label>
+                          <input class="form-control" type="news_image" name="news_image" id="news_image" value="<?php echo $news->news_image?>"/>
+                        </div>
+                      </div>
                       
                       <a href="{{ url('/admin/news') }}" class="btn-cancel1">Cancelar</a>
                       <input class="btn-send1" type="submit" value="Grabar"/>           
