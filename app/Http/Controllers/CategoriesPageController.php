@@ -52,7 +52,7 @@ class CategoriesPageController extends Controller
         $news = news::
             join('categorys', 'categorys.id', '=', 'news.category_id')
            ->join('users', 'users.id', '=','news.Autor')
-           ->select('news.*', 'users.name', 'categorys.nombre', 'categorys.descripcion')
+           ->select('news.*', 'users.name', 'categorys.nombre', 'categorys.descripcion', 'categorys.cat_image')
            ->where('categorys.id', '=', $news->id)
            ->paginate(3);
 

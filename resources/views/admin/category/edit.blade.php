@@ -60,75 +60,114 @@
                                     <!-- Imagen -->
                                     <div class="controls">
                                         <label for="cat_image"> Imagen: </label>
-                                        <input class="form-control" type="file" name="cat_image" id="cat_image"
+                                        <input class="form" type="file" name="cat_image" id="cat_image"
                                             value="{{ old('descripcion') }}" />
+
+                                        @if (!is_null($category->cat_image))
+                                            <a class="#" href="#" role="button"
+                                                onclick="deleteModelRecord({{ $category->id }})"><i
+                                                    class="fas fa-trash-alt"></i> Eliminar Imagen</a>
+                                            <pre delete-dialog-model="deleteModelRecord" class="d-none">
+
+                                                {{-- <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/category/') }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                </form> --}}
+
+                                                <script>
+                                                    function deleteModelRecord(id) {
+                                                        url = $('#deleteModelRecord').attr('action') + "/" + id;
+
+                                                        Swal.fire({
+                                                            title: '¿Estás seguro que deseas eliminar este registro?',
+                                                            text: "La acción no podrá ser revertida!",
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#3085d6',
+                                                            cancelButtonColor: '#d33',
+                                                            confirmButtonText: 'Sí, eliminarlo!',
+                                                            cancelButtonText: 'Cancelar',
+                                                        }).then((result) => {
+                                                            if (result.value) {
+                                                                $('#deleteModelRecord').attr('action', url).submit();
+                                                            }
+                                                        });
+                                                    }
+                                                </script>
+                                            </pre>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{-- <img width="30%" class="img-circle" src="{{ URL::asset('storage/app/public/category/'.$category->cat_image) }}"> --}}
-                                <img src="{{url('storage/app/public/category/'.$category->cat_image)}}" alt={{ $category->cat_image }}>
-
-                                <div class="form-group">
-                                    <div class="controls">
-                                        <a href="{{ url('/admin/category') }}" class="btn-cancel1">Cancelar</a>
-                                        <input class="btn-send1" type="submit" name="send" id="send"
-                                            value="Actualizar" />
+                                    {{-- <img width="30%" class="img-circle" src="{{ URL::asset('storage/app/public/category/'.$category->cat_image) }}"> --}}
+                                    <div class="imageDisplay">
+                                        <img width="25%"
+                                            src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
+                                            alt={{ $category->cat_image }} title="">
                                     </div>
-                                </div>
-                            </form>
+                                    <hr>
+    @endif
+
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <a href="{{ url('/admin/category') }}" class="btn-cancel1">Cancelar</a>
+                                            <input class="btn-send1" type="submit" name="send" id="send"
+                                                value="Actualizar" />
+                                        </div>
+                                    </div>
+                                </form>
 
 
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-body -->
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.col -->
                 </div>
-                <!-- /.col -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
         </div>
-        <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function() {
-            $.validator.setDefaults({
-                submitHandler: function() {
-                    $("#category").submit();
-                }
-            });
-            $('#category').validate({
-                rules: {
-                    nombre: {
-                        required: true
-                    },
-                    descripcion: {
-                        required: true,
-                    },
-                    messages: {
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function() {
+                $.validator.setDefaults({
+                    submitHandler: function() {
+                        $("#category").submit();
+                    }
+                });
+                $('#category').validate({
+                    rules: {
                         nombre: {
-                            required: "Por favor introduzca un nombre."
+                            required: true
                         },
                         descripcion: {
-                            required: "Por favor introduzca una breve descripcion."
+                            required: true,
+                        },
+                        messages: {
+                            nombre: {
+                                required: "Por favor introduzca un nombre."
+                            },
+                            descripcion: {
+                                required: "Por favor introduzca una breve descripcion."
+
+                            },
 
                         },
-
                     },
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
+                    errorElement: 'span',
+                    errorPlacement: function(error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function(element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function(element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+                    }
+                });
             });
-        });
-    </script>
+        </script>
 @endsection

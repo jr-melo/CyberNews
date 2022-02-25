@@ -16,7 +16,7 @@ class CategorysController extends Controller
     {
         $categorys = categorys::active()->get();
 
-        return view('admin.category.index',compact('categorys'));
+        return view('admin.category.index', compact('categorys'));
     }
 
     /**
@@ -40,11 +40,9 @@ class CategorysController extends Controller
         $this->validateFields($request);
 
         if ($request->hasFile('cat_image')) {
-
             $request->validate([
-                'cat_image' => 'mimes:jpeg,png,jpg', // Only allow .jpg, .bmp and .png file types.
+                'cat_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048', // Only allow .jpg, .bmp and .png file types.
             ]);
-
             // Save the file locally in the storage/public/ folder under a new folder named /category
             $request->cat_image->store('category', 'public');
 
@@ -52,17 +50,16 @@ class CategorysController extends Controller
             $category = new categorys([
                 "nombre" => $request->get('nombre'),
                 "descripcion" => $request->get('descripcion'),
-                "cat_image" => $request->cat_image->hashName()
+                "cat_image" => $request->cat_image->hashName(),
             ]);
             $category->save(); // Finally, save the record.
             $request->session()->flash("flash_message", "Registro Creado con Éxito");
-        }else{
+        } else {
             $request->session()->flash("flash_message", "No creado");
         }
 
         $request->session()->flash("flash_message", "test");
         return redirect('/admin/category');
-
     }
 
     /**
@@ -74,7 +71,7 @@ class CategorysController extends Controller
     public function show(categorys $category)
     {
         session()->flashInput($category->toArray());
-        return view('admin.category.show',compact('category'));
+        return view('admin.category.show', compact('category'));
     }
 
     /**
@@ -98,11 +95,25 @@ class CategorysController extends Controller
      */
     public function update(Request $request, categorys $category)
     {
-        $category->update($this->validateFields($request));
-        $category->save();
-        request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
-        return redirect('/admin/category');
+        $this->validateFields($request);
 
+        if ($request->hasFile('cat_image')) {
+            $request->validate([
+                'cat_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $request->cat_image->store('category', 'public');
+
+            $category->update([
+                "nombre" => $request->get('nombre'),
+                "descripcion" => $request->get('descripcion'),
+                "cat_image" => $request->cat_image->hashName(),
+            ]);
+
+            $category->save();
+            request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
+        }
+        return redirect('/admin/category');
     }
 
     /**
@@ -115,12 +126,13 @@ class CategorysController extends Controller
     {
         $category->field_status = 0;
         $category->save();
-        request()->session()->flash("flash_message","El registro fue eliminado de manera satisfactoria!");
+        request()->session()->flash("flash_message", "El registro fue eliminado de manera satisfactoria!");
         return redirect('/admin/category');
     }
 
 
-        public function validateFields(Request $request){
+    public function validateFields(Request $request)
+    {
 
         $validatedData = $request->validate(
             [
@@ -134,5 +146,5 @@ class CategorysController extends Controller
         );
 
         return $validatedData;
-}
+    }
 }

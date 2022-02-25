@@ -45,13 +45,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group">  <!-- Imagen -->
+                        <div class="form-group">
+                          <!-- Imagen -->
                           <div class="controls">
-                            <label for="cat_image"> Imagen: </label>
-                            {{-- <input class="form-control" type="file" name="cat_image" id="cat_image" value="{{ old('cat_image') }}" readonly/> --}}
-                            
+                              <label for="cat_image"> Imagen: </label>  
                           </div>
-                        </div>
+                      </div>
+                      
+                      {{-- <img width="30%" class="img-circle" src="{{ URL::asset('storage/app/public/category/'.$category->cat_image) }}"> --}}
+                      @if (!is_null($category->cat_image))
+                      <div class="imageDisplay">
+                          <img width="25%" 
+                              src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
+                              alt={{ $category->cat_image }} title="">
+                      </div><hr>
+                      @endif
 
                         <div class="form-group">
                             <div class="controls">
