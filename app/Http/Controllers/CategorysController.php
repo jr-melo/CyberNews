@@ -37,9 +37,30 @@ class CategorysController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Categorys($this->validateFields($request));
-        $category->save();
-        $request->session()->flash("flash_message", "Registro Creado con Éxito");
+        $this->validateFields($request);
+
+        if ($request->hasFile('cat_image')) {
+
+            $request->validate([
+                'cat_image' => 'mimes:jpeg,png,jpg', // Only allow .jpg, .bmp and .png file types.
+            ]);
+
+            // Save the file locally in the storage/public/ folder under a new folder named /category
+            $request->cat_image->store('category', 'public');
+
+            // Store the record, using the new file hashname which will be it's new filename identity.
+            $category = new categorys([
+                "nombre" => $request->get('nombre'),
+                "descripcion" => $request->get('descripcion'),
+                "cat_image" => $request->cat_image->hashName()
+            ]);
+            $category->save(); // Finally, save the record.
+            $request->session()->flash("flash_message", "Registro Creado con Éxito");
+        }else{
+            $request->session()->flash("flash_message", "No creado");
+        }
+
+        $request->session()->flash("flash_message", "test");
         return redirect('/admin/category');
 
     }

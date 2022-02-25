@@ -4,8 +4,7 @@
      <a href="{{ url('/') }}" class="brand-link">
          <img src="{{ asset('dist/img/logo4.png') }}" alt="AdminLTE Logo" class="logoimg" style="opacity: .8">
          {{-- <span
-             class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }} > Admin</span>
-         --}}
+             class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }} > Admin</span> --}}
      </a>
 
      <!-- Sidebar -->
@@ -16,7 +15,11 @@
                  <img src="{{ asset('dist/img/userimg3.jpg') }}" class="img-circle elevation-2" alt="User Image">
              </div>
              <div class="info">
-                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                 <a href="#" class="d-block">
+                     @if (auth()->check())
+                         {{ Auth::user()->name }}
+                     @endif
+                 </a>
              </div>
          </div>
 

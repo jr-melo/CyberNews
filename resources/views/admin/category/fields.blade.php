@@ -16,3 +16,11 @@
     </div>
 </div>
 
+
+<div class="form-group">  <!-- Imagen -->
+    <div class="controls">
+      <label for="cat_image"> Imagen: </label>
+      <input class="form-control" type="file" name="cat_image" id="cat_image" value="{{ old('descripcion') }}"/>
+    </div>
+  </div>
+

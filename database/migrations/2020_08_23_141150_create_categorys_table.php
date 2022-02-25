@@ -17,9 +17,12 @@ class CreateCategorysTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
+            $table->string('cat_image')->nullable(); /* Image Column */
             $table->boolean('field_status')->default(true);
             $table->timestamps();
         });
+
+        /* DB::statement("ALTER TABLE categorys ADD cat_image STRING NULL");  /* Image Column */ 
     }
 
     /**

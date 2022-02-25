@@ -12,7 +12,10 @@ class categorys extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+    /* protected $guarded = []; */
+    protected $fillable = [
+        'nombre', 'descripcion', 'cat_image'
+    ];
     public function scopeActive($query)
     {
         $query->where('field_status', 1);

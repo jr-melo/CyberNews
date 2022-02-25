@@ -32,7 +32,7 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form role="form" id="category" name="category" method="post" action="{{ url('/admin/category') }}">
+                    <form role="form" id="category" name="category" method="post" action="{{ url('/admin/category') }}" enctype="multipart/form-data">
                         @method('POST')
                         @csrf
                         @include('admin.category.fields')       

@@ -45,6 +45,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group">  <!-- Imagen -->
+                          <div class="controls">
+                            <label for="cat_image"> Imagen: </label>
+                            {{-- <input class="form-control" type="file" name="cat_image" id="cat_image" value="{{ old('cat_image') }}" readonly/> --}}
+                            
+                          </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="controls">
                                 <a href="{{ url('/admin/category') }}" class="btn-cancel1">Regresar</a>
