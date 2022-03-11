@@ -124,10 +124,11 @@ class CategorysController extends Controller
      */
     public function destroy(categorys $category)
     {
-        $category->field_status = 0;
-        $category->save();
-        request()->session()->flash("flash_message", "El registro fue eliminado de manera satisfactoria!");
-        return redirect('/admin/category');
+            $category->field_status = 0;
+            $category->save();
+            request()->session()->flash("flash_message", "El registro fue eliminado de manera satisfactoria!");
+            return redirect('/admin/category');
+        
     }
 
 
@@ -146,5 +147,24 @@ class CategorysController extends Controller
         );
 
         return $validatedData;
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\categorys  $category
+     * @return \Illuminate\Http\Response
+     */
+
+    public function deleteImage(categorys $category)
+    {
+        $category->cat_image = NULL;
+        $category->save();
+        request()->session()->flash("flash_message", "El registro fue eliminado de manera satisfactoria!");
+        return redirect('/admin/category');
+
+        /* request()->session()->flash("flash_message", "La imagen fue eliminada de manera satisfactoria!");
+        return redirect('/admin/category'); */
     }
 }
