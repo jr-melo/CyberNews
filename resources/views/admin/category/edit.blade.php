@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <div class="controls">
-                                        <label for="nambre"> Nombre: </label>
+                                        <label for="nombre"> Nombre: </label>
                                         <input class="form-control" type="text" name="nombre" id="nombre"
                                             placeholder="Introducir Categoria." value="{{ old('nombre') }}" />
                                         <div id="errcategoria"></div>
@@ -61,54 +61,22 @@
                                     <div class="controls">
                                         <label for="cat_image"> Imagen: </label>
                                         <input class="form" type="file" name="cat_image" id="cat_image"
-                                            value="{{ old('descripcion') }}" />
+                                            value="0" />
 
-                                        @if (!is_null($category->cat_image))
-                                        <li class="list-inline-item">
-                                            <a class="#" href="#" role="button"
-                                                onclick="deleteImage({{ $category->id }})"><i
-                                                    class="fas fa-trash-alt"></i> Eliminar Imagen</a>
-                                            <pre delete-dialog-model="deleteImage" class="d-none">
-
-                                                {{-- <form id="deleteImage" name="deleteImage" action="{{ url('/admin/category/' . $category->id) }}" method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    
-                                                    {{-- {{DB::update('UPDATE categorys SET cat_image = NULL WHERE id=' . $category->id)}} 
-                                                </form>  --}}
-
-                                                    <script>
-                                                        function deleteImage(id) {
-                                                            url = $('#deleteImage').attr('action') + "/" + id;
-                                                            Swal.fire({
-                                                                title: '¿Estás seguro que deseas eliminar este registro?',
-                                                                text: "La acción no podrá ser revertida!",
-                                                                icon: 'warning',
-                                                                showCancelButton: true,
-                                                                confirmButtonColor: '#3085d6',
-                                                                cancelButtonColor: '#d33',
-                                                                confirmButtonText: 'Sí, eliminarlo!',
-                                                                cancelButtonText: 'Cancelar',
-                                                            }).then((result) => {
-                                                                if (result.value) {
-                                                                    $('#deleteImage').attr('action', url).submit();
-                                                                }
-                                                            });
-                                                        }
-                                                    </script>
-                                            </pre>
-                                        </li>
-                                            <div class="imageDisplay">
-                                                <img width="25%"
-                                                    src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
-                                                    alt={{ $category->cat_image }} title="">
-                                            </div>
-                                            <hr>
-                                        @endif
+                                        @if (!is_null($category->cat_image)) {{-- Si existe la imagen muestra el botón, de lo contrario lo oculta. --}}
+                                            <a class="#" id="delete-image" onclick="deleteImage({{ $category->id }})"
+                                                    href="javascript::void()" 
+                                                role="button"><i class="fas fa-trash-alt"></i> Eliminar Imagen</a>
                                     </div>
-                                    {{-- <img width="30%" class="img-circle" src="{{ URL::asset('storage/app/public/category/'.$category->cat_image) }}"> --}}
-
                                 </div>
+
+                                <div class="imageDisplay">
+                                    <img width="25%"
+                                        src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
+                                        alt={{ $category->cat_image }} title="">
+                                </div>
+                                <hr>
+                                        @endif
 
                                 <div class="form-group">
                                     <div class="controls">
@@ -118,6 +86,35 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <form id="deleteImageForm" name="deleteImageForm" action="{{url('/admin/category/' . $category->id . '/edit/deleteImage' )}}" method="POST">
+                                @method('DELETE')
+                                @csrf  
+                            </form>
+
+                            <script type="application/javascript">
+                                async function deleteImage(id) {
+                                    url = $('#deleteImageForm').attr('action');
+                                    await Swal.fire({
+                                        title: '¿Estás seguro que deseas eliminar este registro?',
+                                        text: "La acción no podrá ser revertida!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Sí, eliminarlo!',
+                                        cancelButtonText: 'Cancelar',
+                                    }).then((result) => {
+                                        /* debugger */
+                                        if(result.value){
+                                                $('#deleteImageForm').attr('action', url).submit();
+                                            
+                                        }
+                                    });
+                                }
+                            </script>
+
+
                         </div>
                         <!-- /.card-body -->
                     </div>

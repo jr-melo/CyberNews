@@ -66,11 +66,6 @@
                                                                 href="{{ url('/admin/category/' . $category->id) . '/edit' }}"
                                                                 role="button"><i class="fas fa-edit"></i></a>
                                                         </li>
-                                                        {{-- <li class="list-inline-item">
-                                            <a class="nav-link"
-                                               href="{{ url('/admin/category/' . $categor->id ) . '/delete' }}"
-                                               role="button"><i class="fas fa-trash-alt"></i></a>
-                                          </li> --}}
                                                         <li class="list-inline-item">
                                                             <a class="nav-link" href="#" role="button"
                                                                 onclick="deleteModelRecord({{ $category->id }})"><i
