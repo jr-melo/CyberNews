@@ -29,13 +29,12 @@
                             <div class="row-lg-3">
                                 @if (is_null($category->cat_image))
                                     <a href="#">
-                                        <img class="img-fluid rounded"
-                                            src="https://via.placeholder.com/700x400" alt="">
+                                        <img class="img-fluid rounded" src="https://via.placeholder.com/700x400" alt="">
                                     </a>
 
                                 @else
                                     <a href="#">
-                                        <img width="700px" height="400px" class="img-fluid rounded imgCategories"
+                                        <img class="img-fluid rounded imgCategories"
                                             src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
                                             alt="">
                                     </a>
@@ -72,7 +71,10 @@
     }
 
     .imgCategories {
-        align-content: center;
+        width: 700px;
+        height: 300px;
+        max-width: 700px;
+        max-height: 300px;
     }
 
 </style>

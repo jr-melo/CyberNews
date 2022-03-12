@@ -74,39 +74,39 @@
                                                         <li class="list-inline-item">
                                                             <a class="nav-link" href="#" role="button"
                                                                 onclick="deleteModelRecord({{ $category->id }})"><i
-                                                                    class="fas fa-trash-alt"></i></a>
+                                                                    class="fas fa-trash-alt"></i>
+                                                            </a>
                                                             <pre delete-dialog-model="deleteModelRecord"
                                                                 class="d-none">
 
-                                                        <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/category/') }}" method="POST">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                        </form>
-                                                        
-                                                      <script>
-                                                          function deleteModelRecord(id) {
-                                                              url = $('#deleteModelRecord').attr('action') + "/" + id;
+                                                            <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/category/') }}" method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                            </form>
+                                                            
+                                                          <script>
+                                                              function deleteModelRecord(id) {
+                                                                  url = $('#deleteModelRecord').attr('action') + "/" + id;
 
-                                                              Swal.fire({
-                                                                  title: '¿Estás seguro que deseas eliminar este registro?',
-                                                                  text: "La acción no podrá ser revertida!",
-                                                                  icon: 'warning',
-                                                                  showCancelButton: true,
-                                                                  confirmButtonColor: '#3085d6',
-                                                                  cancelButtonColor: '#d33',
-                                                                  confirmButtonText: 'Sí, eliminarlo!',
-                                                                  cancelButtonText: 'Cancelar',
-                                                              }).then((result) => {
-                                                                  if (result.value) {
-                                                                      $('#deleteModelRecord').attr('action', url).submit();
-                                                                  }
-                                                              });
-                                                          }
-                                                      </script>
-                                                      </pre>
+                                                                  Swal.fire({
+                                                                      title: '¿Estás seguro que deseas eliminar este registro?',
+                                                                      text: "La acción no podrá ser revertida!",
+                                                                      icon: 'warning',
+                                                                      showCancelButton: true,
+                                                                      confirmButtonColor: '#3085d6',
+                                                                      cancelButtonColor: '#d33',
+                                                                      confirmButtonText: 'Sí, eliminarlo!',
+                                                                      cancelButtonText: 'Cancelar',
+                                                                  }).then((result) => {
+                                                                      if (result.value) {
+                                                                          $('#deleteModelRecord').attr('action', url).submit();
+                                                                      }
+                                                                  });
+                                                              }
+                                                          </script>
+                                                          </pre>
                                                         </li>
                                                     </ul>
-
                                                 </div>
                                             </td>
                                         </tr>

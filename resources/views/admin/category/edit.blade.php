@@ -64,110 +64,111 @@
                                             value="{{ old('descripcion') }}" />
 
                                         @if (!is_null($category->cat_image))
+                                        <li class="list-inline-item">
                                             <a class="#" href="#" role="button"
-                                                onclick="deleteModelRecord({{ $category->id }})"><i
+                                                onclick="deleteImage({{ $category->id }})"><i
                                                     class="fas fa-trash-alt"></i> Eliminar Imagen</a>
-                                            <pre delete-dialog-model="deleteModelRecord" class="d-none">
+                                            <pre delete-dialog-model="deleteImage" class="d-none">
 
-                                                {{-- <form id="deleteModelRecord" name="delteModelRecord" action="{{ url('/admin/category/') }}" method="POST">
+                                                {{-- <form id="deleteImage" name="deleteImage" action="{{ url('/admin/category/' . $category->id) }}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                </form> --}}
+                                                    
+                                                    {{-- {{DB::update('UPDATE categorys SET cat_image = NULL WHERE id=' . $category->id)}} 
+                                                </form>  --}}
 
-                                                <script>
-                                                    function deleteModelRecord(id) {
-                                                        url = $('#deleteModelRecord').attr('action') + "/" + id;
-
-                                                        Swal.fire({
-                                                            title: '¿Estás seguro que deseas eliminar este registro?',
-                                                            text: "La acción no podrá ser revertida!",
-                                                            icon: 'warning',
-                                                            showCancelButton: true,
-                                                            confirmButtonColor: '#3085d6',
-                                                            cancelButtonColor: '#d33',
-                                                            confirmButtonText: 'Sí, eliminarlo!',
-                                                            cancelButtonText: 'Cancelar',
-                                                        }).then((result) => {
-                                                            if (result.value) {
-                                                                $('#deleteModelRecord').attr('action', url).submit();
-                                                            }
-                                                        });
-                                                    }
-                                                </script>
+                                                    <script>
+                                                        function deleteImage(id) {
+                                                            url = $('#deleteImage').attr('action') + "/" + id;
+                                                            Swal.fire({
+                                                                title: '¿Estás seguro que deseas eliminar este registro?',
+                                                                text: "La acción no podrá ser revertida!",
+                                                                icon: 'warning',
+                                                                showCancelButton: true,
+                                                                confirmButtonColor: '#3085d6',
+                                                                cancelButtonColor: '#d33',
+                                                                confirmButtonText: 'Sí, eliminarlo!',
+                                                                cancelButtonText: 'Cancelar',
+                                                            }).then((result) => {
+                                                                if (result.value) {
+                                                                    $('#deleteImage').attr('action', url).submit();
+                                                                }
+                                                            });
+                                                        }
+                                                    </script>
                                             </pre>
-                                        </div>
+                                        </li>
+                                            <div class="imageDisplay">
+                                                <img width="25%"
+                                                    src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
+                                                    alt={{ $category->cat_image }} title="">
+                                            </div>
+                                            <hr>
+                                        @endif
                                     </div>
-
                                     {{-- <img width="30%" class="img-circle" src="{{ URL::asset('storage/app/public/category/'.$category->cat_image) }}"> --}}
-                                    <div class="imageDisplay">
-                                        <img width="25%"
-                                            src="{{ 'http://localhost:8080/CyberNews/storage/app/public/category' . '/' . $category->cat_image }}"
-                                            alt={{ $category->cat_image }} title="">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <a href="{{ url('/admin/category') }}" class="btn-cancel1">Cancelar</a>
+                                        <input class="btn-send1" type="submit" name="send" id="send"
+                                            value="Actualizar" />
                                     </div>
-                                    <hr>
-    @endif
-
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <a href="{{ url('/admin/category') }}" class="btn-cancel1">Cancelar</a>
-                                            <input class="btn-send1" type="submit" name="send" id="send"
-                                                value="Actualizar" />
-                                        </div>
-                                    </div>
-                                </form>
-
-
-                            </div>
-                            <!-- /.card-body -->
+                                </div>
+                            </form>
                         </div>
-                        <!-- /.card -->
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col -->
             </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+            <!-- /.row -->
         </div>
-        <script type="text/javascript">
-            document.addEventListener("DOMContentLoaded", function() {
-                $.validator.setDefaults({
-                    submitHandler: function() {
-                        $("#category").submit();
-                    }
-                });
-                $('#category').validate({
-                    rules: {
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    </div>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            $.validator.setDefaults({
+                submitHandler: function() {
+                    $("#category").submit();
+                }
+            });
+            $('#category').validate({
+                rules: {
+                    nombre: {
+                        required: true
+                    },
+                    descripcion: {
+                        required: true,
+                    },
+                    messages: {
                         nombre: {
-                            required: true
+                            required: "Por favor introduzca un nombre."
                         },
                         descripcion: {
-                            required: true,
-                        },
-                        messages: {
-                            nombre: {
-                                required: "Por favor introduzca un nombre."
-                            },
-                            descripcion: {
-                                required: "Por favor introduzca una breve descripcion."
-
-                            },
+                            required: "Por favor introduzca una breve descripcion."
 
                         },
+
                     },
-                    errorElement: 'span',
-                    errorPlacement: function(error, element) {
-                        error.addClass('invalid-feedback');
-                        element.closest('.form-group').append(error);
-                    },
-                    highlight: function(element, errorClass, validClass) {
-                        $(element).addClass('is-invalid');
-                    },
-                    unhighlight: function(element, errorClass, validClass) {
-                        $(element).removeClass('is-invalid');
-                    }
-                });
+                },
+                errorElement: 'span',
+                errorPlacement: function(error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
             });
-        </script>
+        });
+    </script>
 @endsection

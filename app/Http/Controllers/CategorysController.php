@@ -98,6 +98,7 @@ class CategorysController extends Controller
         $this->validateFields($request);
 
         if ($request->hasFile('cat_image')) {
+
             $request->validate([
                 'cat_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
@@ -108,6 +109,16 @@ class CategorysController extends Controller
                 "nombre" => $request->get('nombre'),
                 "descripcion" => $request->get('descripcion'),
                 "cat_image" => $request->cat_image->hashName(),
+            ]);
+
+            $category->save();
+            request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
+            
+        } elseif (!$request->hasFile('cat_image')) {
+
+            $category->update([
+                "nombre" => $request->get('nombre'),
+                "descripcion" => $request->get('descripcion'),
             ]);
 
             $category->save();
@@ -138,6 +149,7 @@ class CategorysController extends Controller
             [
                 'nombre' => 'required',
                 'descripcion' => 'required',
+                'cat_image' => '',
             ],
             [
                 'nombre.required' => 'El nombre de la categoria es requerido.',
@@ -146,5 +158,21 @@ class CategorysController extends Controller
         );
 
         return $validatedData;
+    }
+
+    public function destroyImage(categorys $category)
+    {
+      /*   $category = DB::table('categorys')
+            -> where('id', $request->id)
+            -> update(['cat_image' => NULL]); */
+        
+        /* $category->update([
+            "cat_image" => $request->cat_image->null,
+        ]); */
+
+        $category->cat_image = NULL;
+        $category->save();
+        request()->session()->flash("flash_message","El registro fue actualizado de manera satisfactoria!");
+        return redirect('/admin/news');
     }
 }

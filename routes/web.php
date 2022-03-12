@@ -39,6 +39,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/admin/permissions', 'PermissionsController');
     Route::resource('/admin/news', 'NewsController');
     Route::resource('/admin/category', 'CategorysController');
+
+    Route::delete('/admin/category/{category}/edit', 'CategorysController@destroyImage')->name('category.destroyImage');
 });
 
 
