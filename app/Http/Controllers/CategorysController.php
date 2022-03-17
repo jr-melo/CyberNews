@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\categorys;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategorysController extends Controller
 {
@@ -54,8 +55,16 @@ class CategorysController extends Controller
             ]);
             $category->save(); // Finally, save the record.
             $request->session()->flash("flash_message", "Registro Creado con Éxito");
-        } else {
-            $request->session()->flash("flash_message", "No creado");
+
+        } elseif (!$request->hasFile('cat_image') ) {
+
+            $category = new categorys([
+                "nombre" => $request->get('nombre'),
+                "descripcion" => $request->get('descripcion'),
+            ]);
+            $category->save(); // Finally, save the record.
+            $request->session()->flash("flash_message", "Registro Creado con Éxito");
+
         }
 
         $request->session()->flash("flash_message", "test");
@@ -96,9 +105,12 @@ class CategorysController extends Controller
     public function update(Request $request, categorys $category)
     {
         $this->validateFields($request);
+        $image = $request->get('imageStatus');  // Obtiene el valor del input imageStatus, este valida si al imagen se está eliminando o no.
+        if($image == NULL){ // Si es actualizando el registro, devuelve NULL en imageStatus, por lo cual se define 0 para que sea actualizado sin eliminar imagen.
+            $image = '0';
+        }
 
-        if ($request->hasFile('cat_image')) {
-
+        if ($image == '0' && $request->hasFile('cat_image')) {
             $request->validate([
                 'cat_image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
@@ -111,11 +123,12 @@ class CategorysController extends Controller
                 "cat_image" => $request->cat_image->hashName(),
             ]);
 
-            $category->save();
+            $category->save();  
             request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
-            
-        } elseif (!$request->hasFile('cat_image')) {
+            return redirect('/admin/category');
 
+        } elseif ($image == '0' && !$request->hasFile('cat_image') ) {
+            
             $category->update([
                 "nombre" => $request->get('nombre'),
                 "descripcion" => $request->get('descripcion'),
@@ -123,8 +136,22 @@ class CategorysController extends Controller
 
             $category->save();
             request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
+            return redirect('/admin/category');
+
+        } elseif ($image == '1'){  // Si $image es = 1 indica que se solicita eliminar la imagen, por lo que procede con este if.
+
+            DB::update('UPDATE categorys SET cat_image = NULL WHERE id ='.$request->id);
+            request()->session()->flash("flash_message", "El registro fue actualizado de manera satisfactoria");
+            return redirect('/admin/category');
+
+        } else{
+            
+            request()->session()->flash("flash_message", "Error, no fue actualizado el registro.");
+            return redirect('/admin/category');
         }
-        return redirect('/admin/category');
+
+        
+    
     }
 
     /**
@@ -161,22 +188,4 @@ class CategorysController extends Controller
         return $validatedData;
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\categorys  $category
-     * @return \Illuminate\Http\Response
-     */
-
-    public function deleteImage(categorys $category)
-    {
-        $category->cat_image = NULL;
-        $category->save();
-        request()->session()->flash("flash_message", "El registro fue eliminado de manera satisfactoria!");
-        return redirect('/admin/category');
-
-        /* request()->session()->flash("flash_message", "La imagen fue eliminada de manera satisfactoria!");
-        return redirect('/admin/category'); */
-    }
 }

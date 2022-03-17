@@ -87,33 +87,55 @@
                                 </div>
                             </form>
 
-                            <form id="deleteImageForm" name="deleteImageForm" action="{{url('/admin/category/' . $category->id . '/edit/deleteImage' )}}" method="POST">
-                                @method('DELETE')
-                                @csrf  
-                            </form>
+                            <pre delete-dialog-model="deleteImageForm" class="d-none">
+                                <form id="deleteImageForm" name="deleteImageForm" action="{{url('/admin/category/'.$category->id.'/edit/deleteImage' )}}" method="POST">
+                                    @method('PATCH')
+                                    @csrf  
+                                    <input type="hidden" id="imageStatus" name="imageStatus" value='0'/>  <!-- Input oculto para controlar si se quiere eliminar o no la imagen desde el Controller.-->
+                                    <input type="hidden" id="id" name="id" value="{{ old('id') }}"/>
 
-                            <script type="application/javascript">
-                                async function deleteImage(id) {
-                                    url = $('#deleteImageForm').attr('action');
-                                    await Swal.fire({
-                                        title: '¿Estás seguro que deseas eliminar este registro?',
-                                        text: "La acción no podrá ser revertida!",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Sí, eliminarlo!',
-                                        cancelButtonText: 'Cancelar',
-                                    }).then((result) => {
-                                        /* debugger */
-                                        if(result.value){
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <input class="form-control" type="hidden" name="nombre" id="nombre"
+                                                placeholder="Introducir Categoria." value="{{ old('nombre') }}" />
+                                            <div id="errcategoria"></div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <input class="form-control" type="hidden" name="descripcion"
+                                                id="descripcion" placeholder="Introducir una descripcion."
+                                                value="{{ old('descripcion') }}" />
+                                            <div id="errdescripcion"></div>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+
+                                <script type="application/javascript">
+                                    async function deleteImage(id) {
+                                        url = $('#deleteModelRecord').attr('action');
+                                        await Swal.fire({
+                                            title: '¿Estás seguro que deseas eliminar este registro?',
+                                            text: "La acción no podrá ser revertida!",
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Sí, eliminarlo!',
+                                            cancelButtonText: 'Cancelar',
+                                        }).then((result) => {
+                                            /* debugger */
+                                            if(result.value){
+                                                document.getElementById('imageStatus').value = '1';
                                                 $('#deleteImageForm').attr('action', url).submit();
-                                            
-                                        }
-                                    });
-                                }
-                            </script>
 
+                                            }
+                                        });
+                                    }
+                                </script>
+                            </pre>
 
                         </div>
                         <!-- /.card-body -->
