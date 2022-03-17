@@ -6,7 +6,7 @@ CyberNews es un portal web dedicado a la constante publicación e información d
 
 Una vez el proyecto ha sido clonado, realizar desde el directorio los siguientes pasos:
 
-- git clone https://gitlab.com/jr.melo/CyberNews.git
+- git clone https://github.com/jr-melo/CyberNews
 - composer install
 - npm install
 - Crear base de datos en mysql con el nombre 'cybernewsdb'.
